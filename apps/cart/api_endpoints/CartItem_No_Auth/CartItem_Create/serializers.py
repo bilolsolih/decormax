@@ -4,7 +4,7 @@ from apps.store.models.product import Product
 
 
 class CartItemNoAuthCreateSerializer(serializers.Serializer):
-    id = serializers.CharField()
+    id = serializers.IntegerField()
     price = serializers.IntegerField()
     quantity = serializers.IntegerField()
 

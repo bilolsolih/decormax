@@ -6,4 +6,4 @@ from apps.about.models import Email
 class EmailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Email
-        fields = ['email']
+        fields = ['id', 'email']

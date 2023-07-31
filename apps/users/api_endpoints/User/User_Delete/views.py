@@ -11,7 +11,6 @@ class UserDeleteAPIView(DestroyAPIView):
 
     def perform_destroy(self, instance):
         instance.is_active = False
-        instance.cart.delete()
         instance.save()
         logout(self.request)
 

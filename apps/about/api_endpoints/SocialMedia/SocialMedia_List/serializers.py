@@ -6,4 +6,4 @@ from apps.about.models import SocialMedia
 class SocialMediaSerializer(serializers.ModelSerializer):
     class Meta:
         model = SocialMedia
-        fields = ['social_media', 'link']
+        fields = ['id', 'social_media', 'link']

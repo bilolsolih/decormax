@@ -1,19 +1,17 @@
+from django.conf import settings
+from rest_framework import status
 from rest_framework.generics import DestroyAPIView
-from rest_framework.permissions import IsAuthenticated
-
-from apps.cart.models import CartItem
-from .custom_permission import IsTheOwner
+from rest_framework.response import Response
 
 
-class CartItemDeleteAPIView(DestroyAPIView):
-    permission_classes = [IsAuthenticated, IsTheOwner]
+class CartItemNoAuthDeleteAPIView(DestroyAPIView):
+    def destroy(self, request, *args, **kwargs):
+        id = self.kwargs.get('pk')
+        cart = request.session.get(settings.CART_SESSION_ID, None)
+        if id in cart:
+            del cart[id]
+            request.session.modified = True
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-    def get_queryset(self):
-        user = self.request.user
-        if user.is_authenticated:
-            return CartItem.objects.filter(cart__user=user)
-        else:
-            return None
 
-
-__all__ = ['CartItemDeleteAPIView']
+__all__ = ['CartItemNoAuthDeleteAPIView']

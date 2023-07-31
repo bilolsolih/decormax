@@ -41,7 +41,7 @@ class OrderItem(models.Model):
         verbose_name=_('Product'), to='store.Product', related_name='orders', on_delete=models.SET_NULL, null=True
     )
     quantity = models.PositiveIntegerField(verbose_name=_('Quantity'))
-    cost = models.DecimalField(verbose_name=_('Cost'), max_digits=24, decimal_places=2)
+    cost = models.PositiveIntegerField(verbose_name=_('Cost'))
 
     @property
     def get_product_title(self):

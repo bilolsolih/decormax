@@ -50,7 +50,7 @@ class Product(TimeStampedModel):
     building_material = models.ForeignKey(
         verbose_name=_('Building material'), to='store.BuildingMaterial', related_name='products', on_delete=models.SET_NULL, null=True
     )
-    price = models.DecimalField(verbose_name=_('Price'), max_digits=24, decimal_places=2)
+    price = models.PositiveIntegerField(verbose_name=_('Price'))
 
     active = models.BooleanField(verbose_name=_('Is active'), default=True)
 

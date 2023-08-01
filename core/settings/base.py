@@ -68,6 +68,21 @@ CORS_ALLOWED_ORIGINS = [
     'https://localhost:8080',
 ]
 
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE',
+    'OPTIONS',
+]
+
+CORS_ALLOW_HEADERS = [
+    'Origin',
+    'X-Requested-With',
+    'Content-Type',
+    'Accept',
+    'Authorization',
+]
 ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [

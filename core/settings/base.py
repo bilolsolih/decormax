@@ -68,6 +68,7 @@ CORS_ALLOWED_ORIGINS = [
     'https://localhost:8080',
     'http://localhost:5173',
     'https://localhost:5173',
+    'https://rbot.uz/',
 ]
 
 CORS_ALLOW_METHODS = [

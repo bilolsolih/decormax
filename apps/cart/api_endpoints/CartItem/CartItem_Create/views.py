@@ -20,6 +20,7 @@ class CartItemNoAuthCreateUpdateAPIView(CreateAPIView):
         if not product:
             raise ValueError('Such product doesn\'t exist.')
         cart[id] = {
+            'title': product.title,
             'quantity': quantity,
             'photo': self.request.build_absolute_uri(product.photo.url),
             'cost': product.price * quantity

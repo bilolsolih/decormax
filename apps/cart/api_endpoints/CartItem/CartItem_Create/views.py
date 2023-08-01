@@ -15,14 +15,14 @@ class CartItemNoAuthCreateUpdateAPIView(CreateAPIView):
 
         id = serializer.validated_data['id']
         quantity = serializer.validated_data['quantity']
-        product = Product.objects.filter(pk=id).values('photo', 'price').first()
+        product = Product.objects.filter(pk=id).first()
 
         if not product:
             raise ValueError('Such product doesn\'t exist.')
         cart[id] = {
             'quantity': quantity,
-            'photo': self.request.build_absolute_uri(product['photo']),
-            'cost': int(product['price']) * quantity
+            'photo': self.request.build_absolute_uri(product.photo.url),
+            'cost': product.price * quantity
         }
         self.request.session.modified = True
 

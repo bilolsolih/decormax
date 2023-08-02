@@ -71,21 +71,6 @@ CORS_ALLOWED_ORIGINS = [
     'https://rbot.uz/',
 ]
 
-CORS_ALLOW_METHODS = [
-    'GET',
-    'POST',
-    'PUT',
-    'DELETE',
-    'OPTIONS',
-]
-
-CORS_ALLOW_HEADERS = [
-    'Origin',
-    'X-Requested-With',
-    'Content-Type',
-    'Accept',
-    'Authorization',
-]
 ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [
@@ -248,8 +233,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_NAME = 'sessionid'
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = 'None'
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 86400
-SESSION_COOKIE_DOMAIN = None
 
 STAGE = "develop"

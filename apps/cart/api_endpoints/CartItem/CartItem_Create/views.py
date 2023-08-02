@@ -1,7 +1,7 @@
 from django.conf import settings
 from rest_framework.generics import CreateAPIView
-from apps.store.models.product import Product
 
+from apps.store.models.product import Product
 from .serializers import CartItemNoAuthCreateSerializer
 
 
@@ -20,6 +20,7 @@ class CartItemNoAuthCreateUpdateAPIView(CreateAPIView):
         if not product:
             raise ValueError('Such product doesn\'t exist.')
         cart[id] = {
+            'id': product.id,
             'title': product.title,
             'quantity': quantity,
             'photo': self.request.build_absolute_uri(product.photo.url),

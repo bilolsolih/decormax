@@ -66,8 +66,6 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'https://localhost:8080',
-    'http://localhost:5173',
-    'https://localhost:5173',
     'https://rbot.uz/',
 ]
 

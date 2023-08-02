@@ -1,11 +1,11 @@
 from django.conf import settings
 from rest_framework import status
-from rest_framework.generics import DestroyAPIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
-class CartItemNoAuthDeleteAPIView(DestroyAPIView):
-    def destroy(self, request, *args, **kwargs):
+class CartItemNoAuthDeleteAPIView(APIView):
+    def get(self, request, *args, **kwargs):
         id = self.kwargs.get('pk')
         cart = request.session.get(settings.CART_SESSION_ID, None)
         if id in cart:

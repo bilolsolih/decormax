@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 class CartItemNoAuthDeleteAPIView(APIView):
     def get(self, request, *args, **kwargs):
-        id = self.kwargs.get('pk')
+        id = str(self.kwargs.get('pk'))
         cart = request.session.get(settings.CART_SESSION_ID, None)
         if id in cart:
             del cart[id]

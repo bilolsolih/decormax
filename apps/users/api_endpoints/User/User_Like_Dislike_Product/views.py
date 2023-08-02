@@ -13,7 +13,7 @@ class UserLikeProductAPIView(APIView):
         user = request.user
         product = Product.objects.filter(id=product_id).first()
         if product:
-            if product not in user.liked_products:
+            if product not in user.liked_products.all():
                 user.liked_products.add(product)
                 return Response(status=status.HTTP_200_OK)
             else:

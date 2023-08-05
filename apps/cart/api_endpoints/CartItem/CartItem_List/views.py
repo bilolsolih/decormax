@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
-class CartItemNoAuthListAPIView(APIView):
+class CartItemListAPIView(APIView):
     def get(self, request, *args, **kwargs):
         cart = request.session.get(settings.CART_SESSION_ID, None)
         if not cart:
@@ -12,4 +12,4 @@ class CartItemNoAuthListAPIView(APIView):
         return Response(cart, status=status.HTTP_200_OK)
 
 
-__all__ = ['CartItemNoAuthListAPIView']
+__all__ = ['CartItemListAPIView']

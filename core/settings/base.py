@@ -23,6 +23,7 @@ THIRD_PARTY_APPS = [
     'corsheaders',
     'rosetta',
     'phonenumber_field',
+    # "django_extensions",
 ]
 
 CUSTOM_APPS = [

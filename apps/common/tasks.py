@@ -15,7 +15,9 @@ def photo_compress(pk, app_label, model_name):
         sleep(1)
         instance = model.objects.filter(pk=pk).first()
     buffer = BytesIO()
-    resized_image = Image.open(instance.photo.path).resize(size=(2114, 910)).convert('RGB')
+    width = 2114
+    height = instance.photo.height / (instance.photo.width / width)
+    resized_image = Image.open(instance.photo.path).resize(size=(width, height)).convert('RGB')
     resized_image.save(fp=buffer, format='JPEG', quality=80, optimize=True)
     file_name = f"compressed_{instance.photo.name.rsplit('/', 1)[-1]}"
     instance.photo.delete()

@@ -7,6 +7,7 @@ __pycache__
 *.bak
 wenv/
 db.sqlite3
+db.sqlite
 .idea/
 
 # File-based project format

@@ -8,7 +8,7 @@ class CartItemListAPIView(APIView):
     def get(self, request, *args, **kwargs):
         cart = request.session.get(settings.CART_SESSION_ID, None)
         if not cart:
-            return Response({'detail': 'The cart is empty yet.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'detail': 'The cart is empty yet.'}, status=status.HTTP_200_OK)
         return Response(cart, status=status.HTTP_200_OK)
 
 

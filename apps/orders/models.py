@@ -7,7 +7,7 @@ from .choices import DELIVERY_TYPES, ORDER_STATUS
 
 class Order(models.Model):
     user = models.ForeignKey(
-        verbose_name=_('User'), to='users.User', related_name='orders', on_delete=models.CASCADE, null=True
+        verbose_name=_('User'), to='users.User', related_name='orders', on_delete=models.CASCADE, blank=True, null=True
     )
     store = models.ForeignKey(
         verbose_name=_('Store'), to='store.Store', related_name='orders', on_delete=models.SET_NULL, null=True

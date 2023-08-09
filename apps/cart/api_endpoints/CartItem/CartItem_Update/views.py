@@ -1,6 +1,8 @@
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import UpdateAPIView
+from rest_framework.response import Response
+from rest_framework import status
 
 from apps.cart.models import CartItem
 from .serializers import CartItemUpdateSerializer
@@ -16,16 +18,18 @@ class CartItemUpdateAPIView(UpdateAPIView):
     )
     def patch(self, request, *args, **kwargs):
         self.partial_update(request, *args, **kwargs)
+        return Response(status=status.HTTP_206_PARTIAL_CONTENT)
 
-    def get_queryset(self):
+    def get_object(self):
         user = self.request.user
         device_id = self.request.query_params.get('device_id', None)
         if user.is_authenticated and device_id:
             raise ValueError('device_id is needed only for guest users.')
         if user.is_authenticated:
-            return CartItem.objects.filter(cart__user=user)
+            return CartItem.objects.filter(cart__user=user, pk=self.kwargs.get('pk', None)).first()
         else:
-            return CartItem.objects.filter(device_id=device_id)
+            print('it is working')
+            return CartItem.objects.filter(device_id=device_id, pk=self.kwargs.get('pk', None)).first()
 
 
 __all__ = ['CartItemUpdateAPIView']

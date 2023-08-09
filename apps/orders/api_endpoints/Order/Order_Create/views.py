@@ -3,8 +3,8 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import CreateAPIView
 
-from apps.orders.models import OrderItem
 from apps.cart.models import CartItem
+from apps.orders.models import OrderItem
 from .serializers import OrderCreateSerializer
 
 
@@ -28,6 +28,9 @@ class OrderCreateAPIView(CreateAPIView):
             items = CartItem.objects.filter(cart__user=user)
         else:
             items = CartItem.objects.filter(device_id=device_id)
+
+        if not items:
+            raise ValueError('Your cart is empty, you cannot create an order!')
 
         final_price = items.aggregate(final_price=Sum('cost'))['final_price']
         order = serializer.save(user=user, final_price=final_price)

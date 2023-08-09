@@ -238,4 +238,9 @@ SESSION_COOKIE_SAMESITE = 'None'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 1296000
 
+SWAGGER_SETTINGS = {
+    'LOGIN_URL': 'users:user_login',
+    'LOGOUT_URL': 'users:user_logout'
+}
+
 STAGE = "develop"

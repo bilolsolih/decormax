@@ -16,13 +16,12 @@ class CartItemCreateSerializer(ModelSerializer):
 
     def create(self, data):
         user = self.context['request'].user
-        product = Product.objects.get(pk=data['product'])
         if user.is_authenticated:
             item = CartItem.objects.create(
-                cart=user.cart, product=data['product'], quantity=data['quantity'], cost=(product.price * data['quantity'])
+                cart=user.cart, product=data['product'], quantity=data['quantity'], cost=(data['product'].price * data['quantity'])
             )
         else:
             item = CartItem.objects.create(
-                device_id=data['device_id'], product=data['product'], quantity=data['quantity'], cost=(product.price * data['quantity'])
+                device_id=data['device_id'], product=data['product'], quantity=data['quantity'], cost=(data['product'].price * data['quantity'])
             )
         return item

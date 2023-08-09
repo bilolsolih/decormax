@@ -1,14 +1,28 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer, ValidationError
 
+from apps.cart.models import CartItem
 from apps.store.models.product import Product
 
 
-class CartItemNoAuthCreateSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    quantity = serializers.IntegerField()
+class CartItemCreateSerializer(ModelSerializer):
+    class Meta:
+        model = CartItem
+        fields = ['device_id', 'product', 'quantity']
 
-    def validate(self, attrs):
-        id = attrs.get('id')
-        if id not in Product.objects.all().values_list('id', flat=True):
-            raise serializers.ValidationError('Such product doesn\'t exist.')
-        return attrs
+    def validate(self, data):
+        if data['device_id'] and self.context['request'].user.is_authenticated:
+            raise ValidationError('Authenticated users don\'t have to provide device_id.')
+        return data
+
+    def create(self, data):
+        user = self.context['request'].user
+        product = Product.objects.get(pk=data['product'])
+        if user.is_authenticated:
+            item = CartItem.objects.create(
+                cart=user.cart, product=product, quantity=data['quantity'], cost=(product.price * data['quantity'])
+            )
+        else:
+            item = CartItem.objects.create(
+                device_id=data['device_id'], product=product, quantity=data['quantity'], cost=(product.price * data['quantity'])
+            )
+        return item

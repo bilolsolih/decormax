@@ -4,6 +4,8 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.parsers import FormParser, JSONParser
 from rest_framework.response import Response
 
+from apps.cart.models import Cart
+
 from .custom_permission import IsNotRegisteredAlready
 from .serializers import UserRegisterSerializer
 
@@ -33,11 +35,13 @@ class UserRegisterAPIView(CreateAPIView):
                 user.set_password(cd['password1'])
                 user.is_active = True
                 user.save()
+                Cart.objects.create(user=user)
                 return Response(status=status.HTTP_201_CREATED)
             except User.DoesNotExist:
                 user = User.objects.create(username=username, **defaults)
                 user.set_password(cd['password1'])
                 user.save()
+                Cart.objects.create(user=user)
                 return Response(status=status.HTTP_201_CREATED)
 
 

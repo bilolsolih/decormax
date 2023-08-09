@@ -1,15 +1,21 @@
-from django.conf import settings
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
+
+from apps.cart.models import CartItem
+from .serializers import CartItemListSerializer
 
 
-class CartItemListAPIView(APIView):
-    def get(self, request, *args, **kwargs):
-        cart = request.session.get(settings.CART_SESSION_ID, None)
-        if not cart:
-            return Response({'detail': 'The cart is empty yet.'}, status=status.HTTP_200_OK)
-        return Response(cart, status=status.HTTP_200_OK)
+class CartItemListAPIView(ListAPIView):
+    serializer_class = CartItemListSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        device_id = self.request.query_params.get('device_id', None)
+        if user.is_authenticated and device_id:
+            raise ValueError('device_id is needed only for guest users.')
+        if user.is_authenticated:
+            return CartItem.objects.filter(cart__user=user)
+        else:
+            return CartItem.objects.filter(device_id=device_id)
 
 
 __all__ = ['CartItemListAPIView']

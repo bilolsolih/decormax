@@ -1,10 +1,11 @@
-from rest_framework.generics import DestroyAPIView
+from rest_framework.generics import UpdateAPIView
 
 from apps.cart.models import CartItem
+from .serializers import CartItemUpdateSerializer
 
 
-class CartItemDeleteAPIView(DestroyAPIView):
-    lookup_field = 'pk'
+class CartItemUpdateAPIView(UpdateAPIView):
+    serializer_class = CartItemUpdateSerializer
 
     def get_queryset(self):
         user = self.request.user
@@ -17,4 +18,4 @@ class CartItemDeleteAPIView(DestroyAPIView):
             return CartItem.objects.filter(device_id=device_id)
 
 
-__all__ = ['CartItemDeleteAPIView']
+__all__ = ['CartItemUpdateAPIView']

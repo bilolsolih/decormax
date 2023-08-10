@@ -31,7 +31,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(verbose_name=_('Last name'), max_length=128)
     email = models.EmailField(verbose_name=_('Email'), unique=True)
     liked_products = models.ManyToManyField(
-        verbose_name=_('Liked products'), to='store.Product', related_name='liked_users', blank=True
+        verbose_name=_('Liked products'), to='store.Articul', related_name='liked_users', blank=True
     )
 
     is_active = models.BooleanField(verbose_name=_("Active"), default=True)

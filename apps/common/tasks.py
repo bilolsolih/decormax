@@ -15,11 +15,11 @@ def photo_compress(pk, app_label, model_name):
         sleep(1)
         instance = model.objects.filter(pk=pk).first()
     buffer = BytesIO()
-    width = 2114
-    height = instance.photo.height / (instance.photo.width / width)
+    width = 1920
+    height = int(instance.photo.height // (instance.photo.width / width))
     resized_image = Image.open(instance.photo.path).resize(size=(width, height)).convert('RGB')
-    resized_image.save(fp=buffer, format='JPEG', quality=80, optimize=True)
-    file_name = f"compressed_{instance.photo.name.rsplit('/', 1)[-1]}"
+    resized_image.save(fp=buffer, format='WEBP', quality=80, optimize=True)
+    file_name = f"compressed_{instance.photo.name.rsplit('/', 1)[-1]}.webp"
     instance.photo.delete()
     instance.photo.save(file_name, ContentFile(buffer.getvalue()))
     instance.save()

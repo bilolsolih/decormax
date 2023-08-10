@@ -20,6 +20,11 @@ class CartItemUpdateAPIView(UpdateAPIView):
         self.partial_update(request, *args, **kwargs)
         return Response(status=status.HTTP_206_PARTIAL_CONTENT)
 
+    def perform_update(self, serializer):
+        item = serializer.save()
+        item.cost = item.quantity * item.collection.price
+        item.save()
+
     def get_object(self):
         user = self.request.user
         device_id = self.request.query_params.get('device_id', None)
@@ -28,7 +33,6 @@ class CartItemUpdateAPIView(UpdateAPIView):
         if user.is_authenticated:
             return CartItem.objects.filter(cart__user=user, pk=self.kwargs.get('pk', None)).first()
         else:
-            print('it is working')
             return CartItem.objects.filter(device_id=device_id, pk=self.kwargs.get('pk', None)).first()
 
 

@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from apps.store.models.product import Product
+from apps.store.models.product import Articul
 
 
 class UserLikeProductAPIView(APIView):
@@ -11,7 +11,7 @@ class UserLikeProductAPIView(APIView):
 
     def get(self, request, product_id):
         user = request.user
-        product = Product.objects.filter(id=product_id).first()
+        product = Articul.objects.filter(id=product_id).first()
         if product:
             if product not in user.liked_products.all():
                 user.liked_products.add(product)

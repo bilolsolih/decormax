@@ -1,7 +1,7 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
-from .models.product import Product, Collection, Brand, Variant, Video
+from .models.product import Articul, Collection, Brand, Video
 from .models.product_parameters import Color, Style, PictureType, TargetRoom, Size, ManufacturingMethod, BuildingMaterial
 from .models.store import Store
 
@@ -15,22 +15,21 @@ def delete_selected(modeladmin, request, queryset):
 delete_selected.short_description = 'Delete selected objects'
 
 
-class VariantInline(TranslationTabularInline):
-    model = Variant
-
-
 class VideoInline(admin.TabularInline):
     model = Video
 
 
-class ProductAdmin(TranslationAdmin):
+class ArticulInCollection(admin.TabularInline):
+    model = Articul
+
+
+class CollectionAdmin(TranslationAdmin):
     list_display = ['id', 'title', 'status', 'price', 'active']
     list_editable = ['status', 'active']
-    actions = [delete_selected]
-    inlines = [VariantInline, VideoInline]
+    inlines = [ArticulInCollection, VideoInline]
 
 
-class VariantAdmin(TranslationAdmin):
+class ArticulAdmin(admin.ModelAdmin):
     actions = [delete_selected]
 
     def delete_model(self, request, obj):
@@ -41,10 +40,9 @@ class VideoAdmin(admin.ModelAdmin):
     actions = [delete_selected]
 
 
-admin.site.register(Product, ProductAdmin)
-admin.site.register(Collection)
+admin.site.register(Articul, ArticulAdmin)
+admin.site.register(Collection, CollectionAdmin)
 admin.site.register(Brand)
-admin.site.register(Variant, VariantAdmin)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Store)
 admin.site.register(Color)

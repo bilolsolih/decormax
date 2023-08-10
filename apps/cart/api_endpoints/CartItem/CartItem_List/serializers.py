@@ -1,18 +1,25 @@
 from rest_framework import serializers
 
 from apps.cart.models import CartItem
-from apps.store.models.product import Product
+from apps.store.models.product import Collection, Articul
 
 
-class ProductInCartItem(serializers.ModelSerializer):
+class CollectionInCartItem(serializers.ModelSerializer):
     class Meta:
-        model = Product
+        model = Collection
+        fields = ['id', 'title', 'photo']
+
+
+class ArticulInCartItem(serializers.ModelSerializer):
+    class Meta:
+        model = Articul
         fields = ['id', 'title', 'photo']
 
 
 class CartItemListSerializer(serializers.ModelSerializer):
-    product = ProductInCartItem(many=False)
+    collection = CollectionInCartItem(many=False)
+    articul = ArticulInCartItem(many=False)
 
     class Meta:
         model = CartItem
-        fields = ['id', 'product', 'quantity', 'cost']
+        fields = ['id', 'collection', 'articul', 'quantity', 'cost']

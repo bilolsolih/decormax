@@ -9,8 +9,8 @@ class Inquiry(TimeStampedModel):
     full_name = models.CharField(verbose_name=_('Full name'), max_length=128)
     phone_number = PhoneNumberField(verbose_name=_('Phone number'))
     email = models.EmailField(verbose_name=_('Email'), blank=True, null=True)
-    on_product = models.ForeignKey(
-        verbose_name=_('about product'), to='store.Product', related_name='inquires', on_delete=models.CASCADE, blank=True, null=True
+    on_collection = models.ForeignKey(
+        verbose_name=_('On Collection'), to='store.Collection', related_name='inquires', on_delete=models.CASCADE, blank=True, null=True
     )
     active = models.BooleanField(verbose_name=_('Active?'), default=True)
 

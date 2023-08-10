@@ -4,7 +4,7 @@ from .Collection import *  # noqa
 from .Color import *  # noqa
 from .ManufacturingMethod import *  # noqa
 from .PictureType import *  # noqa
-from .Product import *  # noqa
+from .Articul import *  # noqa
 from .Size import *  # noqa
 from .Style import *  # noqa
 from .TargetRoom import *  # noqa

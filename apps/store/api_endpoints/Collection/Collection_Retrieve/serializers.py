@@ -1,16 +1,14 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
-from apps.store.models.product import Product
+from apps.store.models.product import Collection
 
 
-class ProductRetrieveSerializer(ModelSerializer):
+class CollectionRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Product
+        model = Collection
         fields = [
             'id',
-            'get_collection',
             'title',
-            'photo',
             'description',
             'no_in_pack',
             'status',
@@ -25,5 +23,6 @@ class ProductRetrieveSerializer(ModelSerializer):
             'price',
             'variants',
             'videos',
+            'articuls'
         ]
         depth = 1

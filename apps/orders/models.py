@@ -37,15 +37,16 @@ class OrderItem(models.Model):
     order = models.ForeignKey(
         verbose_name=_('Order'), to='orders.Order', related_name='items', on_delete=models.CASCADE
     )
-    product = models.ForeignKey(
-        verbose_name=_('Product'), to='store.Product', related_name='orders', on_delete=models.SET_NULL, null=True
+    collection = models.ForeignKey(
+        verbose_name=_('Collection'), to='store.Collection', related_name='orders', on_delete=models.SET_NULL, null=True
     )
+    artikul = models.ForeignKey(verbose_name=_('Articul'), to='store.Articul', related_name='orders', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name=_('Quantity'))
     cost = models.DecimalField(verbose_name=_('Cost'), max_digits=24, decimal_places=2)
 
     @property
     def get_product_title(self):
-        return self.product.title
+        return self.collection.title
 
     class Meta:
         verbose_name = _('Order item')

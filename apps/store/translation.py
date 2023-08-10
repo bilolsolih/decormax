@@ -1,53 +1,36 @@
 from modeltranslation.translator import TranslationOptions, translator
 
-from .models.product import Product, Variant
+from .models.product import Collection
 from .models.product_parameters import BuildingMaterial, Style, PictureType, TargetRoom, ManufacturingMethod
 
 
-class ProductTranslationOptions(TranslationOptions):
-    fields = ('title', 'description')
-
-
-translator.register(Product, ProductTranslationOptions)
-
-
-class VariantTranslationOptions(TranslationOptions):
-    fields = ('title',)
-
-
-translator.register(Variant, VariantTranslationOptions)
+class CollectionTranslationOptions(TranslationOptions):
+    fields = ('description',)
 
 
 class BuildingMaterialTranslationOptions(TranslationOptions):
     fields = ('title',)
 
 
-translator.register(BuildingMaterial, BuildingMaterialTranslationOptions)
-
-
 class StyleTranslationOptions(TranslationOptions):
     fields = ('title',)
-
-
-translator.register(Style, StyleTranslationOptions)
 
 
 class PictureTypeTranslationOptions(TranslationOptions):
     fields = ('title',)
 
 
-translator.register(PictureType, PictureTypeTranslationOptions)
-
-
 class TargetRoomTranslationOptions(TranslationOptions):
     fields = ('title',)
-
-
-translator.register(TargetRoom, TargetRoomTranslationOptions)
 
 
 class ManufacturingMethodTranslationOptions(TranslationOptions):
     fields = ('title',)
 
 
+translator.register(TargetRoom, TargetRoomTranslationOptions)
+translator.register(Collection, CollectionTranslationOptions)
+translator.register(BuildingMaterial, BuildingMaterialTranslationOptions)
 translator.register(ManufacturingMethod, ManufacturingMethodTranslationOptions)
+translator.register(Style, StyleTranslationOptions)
+translator.register(PictureType, PictureTypeTranslationOptions)

@@ -18,11 +18,11 @@ class CartItemListAPIView(ListAPIView):
         return self.list(request, *args, **kwargs)
 
     def get_queryset(self):
-        user = self.request.user
+        user = self.request.user if self.request.user.is_authenticated else None
         device_id = self.request.query_params.get('device_id', None)
-        if user.is_authenticated and device_id:
+        if user and device_id:
             raise ValueError('device_id is needed only for guest users.')
-        if user.is_authenticated:
+        if user:
             return CartItem.objects.filter(cart__user=user)
         else:
             return CartItem.objects.filter(device_id=device_id)

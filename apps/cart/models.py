@@ -25,9 +25,10 @@ class CartItem(models.Model):
         verbose_name=_('Cart'), to='cart.Cart', related_name='items', on_delete=models.CASCADE, blank=True, null=True
     )
     device_id = models.CharField(verbose_name=_('Device id'), max_length=64, blank=True, null=True)
-    product = models.ForeignKey(
-        verbose_name=_('Product'), to='store.Product', related_name='cart_entries', on_delete=models.SET_NULL, null=True
+    collection = models.ForeignKey(
+        verbose_name=_('Collection'), to='store.Collection', on_delete=models.SET_NULL, null=True
     )
+    articul = models.ForeignKey(verbose_name=_('Articul'), to='store.Articul', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name=_('Quantity'), default=0)
     cost = models.DecimalField(verbose_name=_('Cost'), max_digits=24, decimal_places=2, default=0)
 
@@ -36,4 +37,4 @@ class CartItem(models.Model):
         verbose_name_plural = _('Cart items')
 
     def __str__(self):
-        return f"{self.product.title} - {self.quantity}pcs"
+        return f"{self.collection.title} - {self.quantity}pcs"

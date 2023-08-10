@@ -9,6 +9,7 @@ wenv/
 db.sqlite3
 db.sqlite
 .idea/
+media
 
 # File-based project format
 *.iws

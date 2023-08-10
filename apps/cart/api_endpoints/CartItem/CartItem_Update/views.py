@@ -10,6 +10,7 @@ from .serializers import CartItemUpdateSerializer
 
 class CartItemUpdateAPIView(UpdateAPIView):
     serializer_class = CartItemUpdateSerializer
+    queryset = CartItem.objects.all()
 
     @swagger_auto_schema(
         manual_parameters=[

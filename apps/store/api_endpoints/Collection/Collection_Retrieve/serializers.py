@@ -21,7 +21,6 @@ class CollectionRetrieveSerializer(serializers.ModelSerializer):
             'manufacturing_method',
             'building_material',
             'price',
-            'variants',
             'videos',
             'articuls'
         ]

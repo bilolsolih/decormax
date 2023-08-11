@@ -46,9 +46,9 @@ class CartItemDeleteAllAPIView(APIView):
         if user and device_id:
             raise ValueError('device_id is needed only for guest users.')
         if user:
-            return CartItem.objects.filter(cart__user=user).delete()
+            return CartItem.objects.filter(cart__user=user)
         else:
-            return CartItem.objects.filter(device_id=device_id).delete()
+            return CartItem.objects.filter(device_id=device_id)
 
 
 __all__ = ['CartItemDeleteAPIView', 'CartItemDeleteAllAPIView']

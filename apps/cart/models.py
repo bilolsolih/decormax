@@ -28,7 +28,7 @@ class CartItem(models.Model):
     collection = models.ForeignKey(
         verbose_name=_('Collection'), to='store.Collection', on_delete=models.SET_NULL, null=True
     )
-    articul = models.ForeignKey(verbose_name=_('Articul'), to='store.Articul', on_delete=models.CASCADE)
+    articul = models.ForeignKey(verbose_name=_('Articul'), to='store.Articul', on_delete=models.CASCADE, blank=True, null=True)
     quantity = models.PositiveIntegerField(verbose_name=_('Quantity'), default=0)
     cost = models.DecimalField(verbose_name=_('Cost'), max_digits=24, decimal_places=2, default=0)
 

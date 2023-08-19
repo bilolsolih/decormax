@@ -35,6 +35,7 @@ class CartItem(models.Model):
     class Meta:
         verbose_name = _('Cart item')
         verbose_name_plural = _('Cart items')
+        unique_together = ['cart', 'collection', 'device_id']
 
     def __str__(self):
         return f"{self.collection.title} - {self.quantity}pcs"

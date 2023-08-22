@@ -26,7 +26,7 @@ class ArticulInCollection(admin.TabularInline):
 
 class CollectionAdmin(TranslationAdmin):
     list_display = ['id', 'title', 'status', 'price', 'active']
-    list_editable = ['status', 'active']
+    list_editable = ['status', 'price', 'active']
     inlines = [ArticulInCollection, VideoInline]
     list_display_links = ['id', 'title']
 

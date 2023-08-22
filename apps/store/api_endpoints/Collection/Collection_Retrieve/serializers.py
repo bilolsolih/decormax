@@ -10,6 +10,7 @@ class CollectionRetrieveSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'description',
+            'description_2',
             'no_in_pack',
             'status',
             'brand',

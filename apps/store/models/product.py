@@ -84,5 +84,3 @@ class Video(TimeStampedModel):
 
     def __str__(self):
         return f"{self.collection.title}'s video - {self.pk}"
-
-# TODO: kerakli modellarning barchasi adminga qo'shilganini tekshirish

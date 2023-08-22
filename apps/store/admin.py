@@ -1,5 +1,6 @@
 from django.contrib import admin
-from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
+from django.db.models.signals import post_save
+from modeltranslation.admin import TranslationAdmin
 
 from .models.product import Articul, Collection, Brand, Video
 from .models.product_parameters import Color, Style, PictureType, TargetRoom, Size, ManufacturingMethod, BuildingMaterial
@@ -28,9 +29,17 @@ class CollectionAdmin(TranslationAdmin):
     list_editable = ['status', 'active']
     inlines = [ArticulInCollection, VideoInline]
 
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        post_save.send(sender=Collection, instance=obj, created=change)
+
 
 class ArticulAdmin(admin.ModelAdmin):
     actions = [delete_selected]
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        post_save.send(sender=Articul, instance=obj, created=change)
 
     def delete_model(self, request, obj):
         obj.delete()

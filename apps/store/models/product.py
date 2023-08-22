@@ -30,6 +30,11 @@ class Collection(TimeStampedModel):
         verbose_name = _('Collection')
         verbose_name_plural = _('Collections')
 
+    def delete(self, *args, **kwargs):
+        if hasattr(self, 'photo') and self.photo and os.path.exists(self.photo.path):
+            os.remove(self.photo.path)
+        super().delete()
+
     def __str__(self):
         return self.title
 
@@ -58,7 +63,7 @@ class Articul(TimeStampedModel):
         verbose_name_plural = _('Articuls')
 
     def delete(self, *args, **kwargs):
-        if self.photo.path and os.path.exists(self.photo.path):
+        if hasattr(self, 'photo') and self.photo.path and os.path.exists(self.photo.path):
             os.remove(self.photo.path)
         super().delete(*args, **kwargs)
 
@@ -76,9 +81,9 @@ class Video(TimeStampedModel):
         verbose_name_plural = _('Videos')
 
     def delete(self, *args, **kwargs):
-        if self.photo.path and os.path.exists(self.photo.path):
+        if hasattr(self, 'photo') and self.photo.path and os.path.exists(self.photo.path):
             os.remove(self.photo.path)
-        if self.video.path and os.path.exists(self.video.path):
+        if hasattr(self, 'video') and self.video.path and os.path.exists(self.video.path):
             os.remove(self.video.path)
         super().delete(*args, **kwargs)
 

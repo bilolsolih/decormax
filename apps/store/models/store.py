@@ -10,6 +10,7 @@ class Store(models.Model):
     district = models.CharField(verbose_name=_('City or district'), max_length=128)
     address = models.CharField(verbose_name=_('Address'), max_length=256)
     orient = models.CharField(verbose_name=_('Orient'), max_length=256, blank=True, null=True)
+    location = models.TextField(verbose_name=_('Location for iFrame'), blank=True, null=True)
 
     class Meta:
         verbose_name = _('Store')

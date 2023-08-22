@@ -1,10 +1,11 @@
+from .Articul import *  # noqa
 from .Brand import *  # noqa
 from .BuildingMaterial import *  # noqa
 from .Collection import *  # noqa
 from .Color import *  # noqa
 from .ManufacturingMethod import *  # noqa
 from .PictureType import *  # noqa
-from .Articul import *  # noqa
 from .Size import *  # noqa
+from .Store import *  # noqa
 from .Style import *  # noqa
 from .TargetRoom import *  # noqa

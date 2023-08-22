@@ -70,7 +70,7 @@ class Video(TimeStampedModel):
     collection = models.ForeignKey(verbose_name=_('Collection'), to='store.Collection', related_name='videos',
                                    on_delete=models.CASCADE)
     video = models.FileField(verbose_name=_('Video file'), upload_to='videos/store/articuls/%Y/%m/%d')
-    photo = models.ImageField(verbose_name=_('Photo'), upload_to='videos/store/articuls/%Y/%m/%d')
+    photo = models.ImageField(verbose_name=_('Photo'), upload_to='videos/store/articuls/%Y/%m/%d', blank=True, null=True)
 
     class Meta:
         verbose_name = _('Video')

@@ -9,8 +9,15 @@ class CartItemCreateSerializer(ModelSerializer):
         fields = ['device_id', 'collection', 'articul', 'quantity']
 
     def validate(self, data):
-        if hasattr(data, 'device_id') and data['device_id'] and self.context['request'].user.is_authenticated:
+        user = self.context['request'].user
+        if hasattr(data, 'device_id') and data['device_id'] and user.is_authenticated:
             raise ValidationError('Authenticated users don\'t have to provide device_id.')
+        if hasattr(data, 'device_id') and data['device_id']:
+            if CartItem.objects.filter(device_id=data['device_id'], collection=data['collection']).first().exists():
+                raise ValueError('Item already in the cart.')
+        if self.context['request'].user.is_authenticated:
+            if CartItem.objects.filter(cart=user.cart, collection=data['collection']).first().exists():
+                raise ValueError('Item already in the cart.')
         return data
 
     def create(self, data):
@@ -22,7 +29,8 @@ class CartItemCreateSerializer(ModelSerializer):
             )
         else:
             item = CartItem.objects.create(
-                device_id=data['device_id'], collection=data['collection'], articul=data['articul'], quantity=data['quantity'],
+                device_id=data['device_id'], collection=data['collection'], articul=data['articul'],
+                quantity=data['quantity'],
                 cost=(data['collection'].price * data['quantity'])
             )
         return item

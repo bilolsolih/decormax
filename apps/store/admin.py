@@ -28,6 +28,7 @@ class CollectionAdmin(TranslationAdmin):
     list_display = ['id', 'title', 'status', 'price', 'active']
     list_editable = ['status', 'active']
     inlines = [ArticulInCollection, VideoInline]
+    list_display_links = ['id', 'title']
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)

@@ -1,6 +1,7 @@
 import django_filters
 from django_filters.rest_framework import FilterSet, DjangoFilterBackend
 from rest_framework.generics import ListAPIView
+from rest_framework.pagination import PageNumberPagination
 
 from apps.store.models.product import Collection
 from apps.store.models.product_parameters import TargetRoom, Style, PictureType, Color, Size
@@ -27,6 +28,7 @@ class CollectionListAPIView(ListAPIView):
     serializer_class = CollectionListSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = CollectionFilterSet
+    pagination_class = PageNumberPagination
 
 
 __all__ = ['CollectionListAPIView']

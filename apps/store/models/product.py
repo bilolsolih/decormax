@@ -11,7 +11,7 @@ class Collection(TimeStampedModel):
     title = models.CharField(verbose_name=_("Title"), max_length=128)
     photo = models.ImageField(verbose_name=_('Photo'), upload_to='images/store/collections/%Y/%m/%d')
     description = models.TextField(verbose_name=_('Description'))
-    description_2 = models.TextField(verbose_name=_('Description'), blank=True, null=True)
+    description_2 = models.TextField(verbose_name=_('Description 2'), blank=True, null=True)
     no_in_pack = models.PositiveIntegerField(verbose_name=_('Number in a pack'))
     status = models.CharField(verbose_name=_('Status'), choices=PRODUCT_STATUS, max_length=4, null=True, blank=True)
     brand = models.ManyToManyField(verbose_name=_('Brand'), to='store.Brand', related_name='products')

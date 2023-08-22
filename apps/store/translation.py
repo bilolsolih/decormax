@@ -5,7 +5,7 @@ from .models.product_parameters import BuildingMaterial, Style, PictureType, Tar
 
 
 class CollectionTranslationOptions(TranslationOptions):
-    fields = ('description',)
+    fields = ('description', 'description_2')
 
 
 class BuildingMaterialTranslationOptions(TranslationOptions):

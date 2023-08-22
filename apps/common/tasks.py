@@ -6,6 +6,8 @@ from celery import shared_task
 from django.apps import apps
 from django.core.files.base import ContentFile
 
+from apps.store.models.product import Collection
+
 
 @shared_task
 def photo_compress(pk, app_label, model_name):
@@ -17,7 +19,10 @@ def photo_compress(pk, app_label, model_name):
     buffer = BytesIO()
     width = 1920
     height = int(instance.photo.height // (instance.photo.width / width))
-    quality = 80 if instance.status != 'Hit' else 100
+    if isinstance(instance, Collection):
+        quality = 80 if instance.status != 'Hit' else 100
+    else:
+        quality = 80
     resized_image = Image.open(instance.photo.path).resize(size=(width, height)).convert('RGB')
     resized_image.save(fp=buffer, format='WEBP', quality=quality, optimize=True)
     file_name = f"compressed_{instance.photo.name.rsplit('/', 1)[-1]}.webp"

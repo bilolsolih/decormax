@@ -72,6 +72,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8080',
+    "https://rbot.uz"
 ]
 
 ROOT_URLCONF = "core.urls"

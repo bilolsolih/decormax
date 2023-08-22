@@ -13,6 +13,7 @@ urlpatterns = i18n_patterns(
     path('api/v1/users/', include('apps.users.urls', namespace='users')),
     path('api/v1/about/', include('apps.about.urls', namespace='about')),
     path('api/v1/cart/', include('apps.cart.urls', namespace='cart')),
+    path('api/v1/common/', include("apps.common.urls", namespace='common')),
     path('api/v1/store/', include('apps.store.urls', namespace='store')),
     path('api/v1/news/', include('apps.news.urls', namespace='news')),
     path('api/v1/inquiries/', include('apps.inquiries.urls', namespace='inquiries')),

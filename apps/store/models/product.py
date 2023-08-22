@@ -81,10 +81,13 @@ class Video(TimeStampedModel):
         verbose_name_plural = _('Videos')
 
     def delete(self, *args, **kwargs):
-        if hasattr(self, 'photo') and hasattr(self.photo, 'path') and self.photo.path and os.path.exists(self.photo.path):
-            os.remove(self.photo.path)
-        if hasattr(self, 'video') and hasattr(self.video, 'path') and self.video.path and os.path.exists(self.video.path):
-            os.remove(self.video.path)
+        try:
+            if hasattr(self, 'photo') and hasattr(self.photo, 'path') and self.photo.path and os.path.exists(self.photo.path):
+                os.remove(self.photo.path)
+            if hasattr(self, 'video') and hasattr(self.video, 'path') and self.video.path and os.path.exists(self.video.path):
+                os.remove(self.video.path)
+        except ValueError:
+            pass
         super().delete(*args, **kwargs)
 
     def __str__(self):

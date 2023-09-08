@@ -69,6 +69,10 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'https://localhost:8080',
     'https://rbot.uz',
+    'oboi-maxdecor.uz',
+    'maxdecor.uz',
+    'oboi.maxdecor.uz'
+
 ]
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8080',

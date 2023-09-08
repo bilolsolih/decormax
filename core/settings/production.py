@@ -1,11 +1,16 @@
 from .base import *  # noqa
+from os import getenv
 
-ALLOWED_HOSTS = ['bilolsolih.pythonanywhere.com']
+ALLOWED_HOSTS = ['bilolsolih.pythonanywhere.com', 'api.oboi-maxdecor.uz']
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": getenv('DB_ENGINE'),
+        "NAME": getenv('DB_NAME'),
+        "USER": getenv('DB_USER'),
+        "PASSWORD": getenv('DB_PASSWORD'),
+        "HOST": getenv('localhost'),
+        "PORT": getenv('DB_PORT')
     }
 }
 

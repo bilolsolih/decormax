@@ -14,6 +14,6 @@ DATABASES = {
     }
 }
 
-DEBUG = False
+DEBUG = True
 
 ADMINS = [("BlackHoler", "BilolMuhammadSolih@gmail.com")]

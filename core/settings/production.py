@@ -1,7 +1,7 @@
 from .base import *  # noqa
 from os import getenv
 
-ALLOWED_HOSTS = ['bilolsolih.pythonanywhere.com', 'api.oboi-maxdecor.uz']
+ALLOWED_HOSTS = ['bilolsolih.pythonanywhere.com', 'api.maxdecor.uz']
 
 DATABASES = {
     "default": {

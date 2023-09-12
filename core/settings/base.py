@@ -243,16 +243,6 @@ EMAIL_HOST_PASSWORD = os.getenv('SMTP_PASSWORD')
 
 CART_SESSION_ID = 'cart'
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_NAME = 'sessionid'
-SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SAMESITE = 'None'
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SESSION_COOKIE_AGE = 60 * 60 * 24
-
-CSRF_COOKIE_AGE = 60 * 60 * 24
-
 SWAGGER_SETTINGS = {
     'LOGIN_URL': 'users:user_login',
     'LOGOUT_URL': 'users:user_logout'

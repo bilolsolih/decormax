@@ -22,6 +22,10 @@ class CollectionFilterSet(FilterSet):
     color = django_filters.ModelMultipleChoiceFilter(field_name='color__pk', queryset=Color.objects.all(), to_field_name='pk')
     size = django_filters.ModelMultipleChoiceFilter(field_name='size__pk', queryset=Size.objects.all(), to_field_name='pk')
 
+    class Meta:
+        model = 'store.Collection'
+        fields = ['status']
+
 
 class CollectionListAPIView(ListAPIView):
     queryset = Collection.objects.all()

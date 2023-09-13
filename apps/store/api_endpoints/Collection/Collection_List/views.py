@@ -23,7 +23,7 @@ class CollectionFilterSet(FilterSet):
     size = django_filters.ModelMultipleChoiceFilter(field_name='size__pk', queryset=Size.objects.all(), to_field_name='pk')
 
     class Meta:
-        model = 'store.Collection'
+        model = Collection
         fields = ['status']
 
 

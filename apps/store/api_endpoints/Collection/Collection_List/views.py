@@ -26,13 +26,22 @@ class CollectionFilterSet(FilterSet):
         model = Collection
         fields = ['status']
 
+class CustomPageNumberPagination(PageNumberPagination):
+    def get_paginated_response(self, data):
+        return {
+            'count': self.page.paginator.count,
+            'next': self.get_next_link(),
+            'previous': self.get_previous_link(),
+            'results': data,
+            'total_pages': self.page.paginator.num_pages,
+        }
 
 class CollectionListAPIView(ListAPIView):
     queryset = Collection.objects.all()
     serializer_class = CollectionListSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = CollectionFilterSet
-    pagination_class = PageNumberPagination
+    pagination_class = CustomPageNumberPagination
 
 
 __all__ = ['CollectionListAPIView']

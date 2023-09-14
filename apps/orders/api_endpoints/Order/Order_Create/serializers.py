@@ -6,4 +6,4 @@ from apps.orders.models import Order
 class OrderCreateSerializer(ModelSerializer):
     class Meta:
         model = Order
-        fields = ['full_name', 'phone_number', 'email', 'store', 'delivery_type', 'payment_method']
+        fields = ['full_name', 'phone_number', 'email', 'store', 'delivery_type', 'payment_method', 'city', 'region', 'address', 'level', 'delivery_date', ]

@@ -21,6 +21,13 @@ class Order(models.Model):
         null=True
     )
     final_price = models.DecimalField(verbose_name=_('Final price'), max_digits=24, decimal_places=2, default=0)
+
+    city = models.CharField(_('Destination city'), max_length=128, blank=True, null=True)
+    region = models.CharField(_('Region'), max_length=128, blank=True, null=True)
+    address = models.CharField(_('Address'), max_length=128, blank=True, null=True)
+    level = models.CharField(_('Floor number'), max_length=128, blank=True, null=True)
+    delivery_date = models.DateField(_('Delivery date'), blank=True, null=True)
+
     created = models.DateTimeField(verbose_name=_('Created at'), auto_now_add=True)
 
     status = models.CharField(verbose_name=_('Status'), max_length=1, choices=ORDER_STATUS, default='p')
@@ -40,7 +47,8 @@ class OrderItem(models.Model):
     collection = models.ForeignKey(
         verbose_name=_('Collection'), to='store.Collection', related_name='orders', on_delete=models.SET_NULL, null=True
     )
-    artikul = models.ForeignKey(verbose_name=_('Articul'), to='store.Articul', related_name='orders', on_delete=models.CASCADE)
+    artikul = models.ForeignKey(verbose_name=_('Articul'), to='store.Articul', related_name='orders',
+                                on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name=_('Quantity'))
     cost = models.DecimalField(verbose_name=_('Cost'), max_digits=24, decimal_places=2)
 

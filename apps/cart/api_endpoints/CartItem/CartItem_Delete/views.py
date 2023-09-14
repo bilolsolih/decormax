@@ -37,8 +37,7 @@ class CartItemDeleteAllAPIView(APIView):
         query_set.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    @staticmethod
-    def get_queryset(request):
+    def get_queryset(self, request):
         user = request.user if request.user.is_authenticated else None
         device_id = request.query_params.get('device_id', None)
         if user:

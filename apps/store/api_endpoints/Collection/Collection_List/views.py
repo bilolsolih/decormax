@@ -1,7 +1,9 @@
 import django_filters
 from django_filters.rest_framework import FilterSet, DjangoFilterBackend
+from rest_framework import status
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
 
 from apps.store.models.product import Collection
 from apps.store.models.product_parameters import TargetRoom, Style, PictureType, Color, Size
@@ -19,22 +21,26 @@ class CollectionFilterSet(FilterSet):
     picture_type = django_filters.ModelMultipleChoiceFilter(
         field_name='picture_type__pk', queryset=PictureType.objects.all(), to_field_name='pk'
     )
-    color = django_filters.ModelMultipleChoiceFilter(field_name='color__pk', queryset=Color.objects.all(), to_field_name='pk')
-    size = django_filters.ModelMultipleChoiceFilter(field_name='size__pk', queryset=Size.objects.all(), to_field_name='pk')
+    color = django_filters.ModelMultipleChoiceFilter(field_name='color__pk', queryset=Color.objects.all(),
+                                                     to_field_name='pk')
+    size = django_filters.ModelMultipleChoiceFilter(field_name='size__pk', queryset=Size.objects.all(),
+                                                    to_field_name='pk')
 
     class Meta:
         model = Collection
         fields = ['status']
 
+
 class CustomPageNumberPagination(PageNumberPagination):
     def get_paginated_response(self, data):
-        return {
+        return Response({
             'count': self.page.paginator.count,
             'next': self.get_next_link(),
             'previous': self.get_previous_link(),
             'results': data,
             'total_pages': self.page.paginator.num_pages,
-        }
+        }, status=status.HTTP_200_OK)
+
 
 class CollectionListAPIView(ListAPIView):
     queryset = Collection.objects.all()

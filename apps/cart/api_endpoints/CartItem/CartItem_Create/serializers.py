@@ -10,8 +10,6 @@ class CartItemCreateSerializer(ModelSerializer):
 
     def validate(self, data):
         user = self.context['request'].user
-        if "device_id" in data and data['device_id'] and user.is_authenticated:
-            raise ValidationError('Authenticated users don\'t have to provide device_id.')
 
         if "device_id" in data and data['device_id']:
             if CartItem.objects.filter(device_id=data['device_id'], collection=data['collection']).first():

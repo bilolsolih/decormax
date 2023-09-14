@@ -20,8 +20,6 @@ class CartItemDeleteAPIView(DestroyAPIView):
     def get_queryset(self):
         user = self.request.user if self.request.user.is_authenticated else None
         device_id = self.request.query_params.get('device_id', None)
-        if user and device_id:
-            raise ValueError('device_id is needed only for guest users.')
         if user:
             return CartItem.objects.filter(cart__user=user)
         else:
@@ -43,8 +41,6 @@ class CartItemDeleteAllAPIView(APIView):
     def get_queryset(request):
         user = request.user if request.user.is_authenticated else None
         device_id = request.query_params.get('device_id', None)
-        if user and device_id:
-            raise ValueError('device_id is needed only for guest users.')
         if user:
             return CartItem.objects.filter(cart__user=user)
         else:

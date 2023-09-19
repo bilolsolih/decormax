@@ -249,4 +249,6 @@ SWAGGER_SETTINGS = {
     'LOGOUT_URL': 'users:user_logout'
 }
 
+CSRF_COOKIE_AGE = 604800
+
 STAGE = "develop"

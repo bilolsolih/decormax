@@ -79,7 +79,8 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8080',
-    "https://rbot.uz"
+    "https://rbot.uz",
+    "https://maxdecor.uz"
 ]
 
 ROOT_URLCONF = "core.urls"

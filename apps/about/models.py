@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
@@ -49,3 +50,28 @@ class SocialMedia(models.Model):
 
     def __str__(self):
         return f"{self.social_media} - {self.link}"
+
+
+class CompanyHistory(models.Model):
+    year = models.CharField(_('Year'), max_length=4)
+    content = RichTextField(_('Content'))
+
+    class Meta:
+        verbose_name = _('Company history')
+        verbose_name_plural = _('Company histories')
+
+    def __str__(self):
+        return f"Company history for - {self.year}"
+
+
+class CompanyStat(models.Model):
+    icon = models.ImageField(_('Stat icon'), upload_to='images/about/company_stats/')
+    title = models.CharField(_('Stat title'), max_length=256)
+    content = RichTextField(_('Content'))
+
+    class Meta:
+        verbose_name = _('Company stat')
+        verbose_name_plural = _('Company stats')
+
+    def __str__(self):
+        return f"Stats for - {self.title}"

@@ -252,5 +252,6 @@ SWAGGER_SETTINGS = {
 }
 
 CSRF_COOKIE_AGE = 604800
+CSRF_COOKIE_NAME = 'csrftoken'
 
 STAGE = "develop"

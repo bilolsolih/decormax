@@ -58,8 +58,8 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
+    "django.middleware.common.CommonMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -70,19 +70,13 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'https://localhost:8080',
-    'https://rbot.uz',
-    'https://oboi-maxdecor.uz',
     'https://maxdecor.uz',
     'https://www.maxdecor.uz',
-    'https://oboi.maxdecor.uz',
-    'http://oboi-maxdecor.uz',
     'http://maxdecor.uz',
-    'http://oboi.maxdecor.uz'
 
 ]
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8080',
-    "https://rbot.uz",
     "https://maxdecor.uz",
     "https://www.maxdecor.uz"
 ]

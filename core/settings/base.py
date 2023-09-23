@@ -71,6 +71,7 @@ CORS_ALLOWED_ORIGINS = [
     'https://rbot.uz',
     'https://oboi-maxdecor.uz',
     'https://maxdecor.uz',
+    'https://www.maxdecor.uz',
     'https://oboi.maxdecor.uz',
     'http://oboi-maxdecor.uz',
     'http://maxdecor.uz',
@@ -80,7 +81,8 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8080',
     "https://rbot.uz",
-    "https://maxdecor.uz"
+    "https://maxdecor.uz",
+    "https://www.maxdecor.uz"
 ]
 
 ROOT_URLCONF = "core.urls"

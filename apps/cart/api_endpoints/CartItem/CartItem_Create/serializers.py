@@ -12,11 +12,11 @@ class CartItemCreateSerializer(ModelSerializer):
         user = self.context['request'].user
 
         if "device_id" in data and data['device_id']:
-            if CartItem.objects.filter(device_id=data['device_id'], collection=data['collection']).first():
+            if CartItem.objects.filter(device_id=data['device_id'], articul=data['articul']).first():
                 raise ValidationError('Item already in the cart.')
 
         if self.context['request'].user.is_authenticated:
-            if CartItem.objects.filter(cart=user.cart, collection=data['collection']).first():
+            if CartItem.objects.filter(cart=user.cart, articul=data['articul']).first():
                 raise ValidationError('Item already in the cart.')
         return data
 

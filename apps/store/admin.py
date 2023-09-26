@@ -25,10 +25,12 @@ class ArticulInCollection(admin.TabularInline):
 
 
 class CollectionAdmin(TranslationAdmin):
-    list_display = ['id', 'title', 'status', 'price', 'active']
-    list_editable = ['status', 'price', 'active']
-    inlines = [ArticulInCollection, VideoInline]
+    list_display = ['id', 'title', 'no_in_pack', 'is_header', 'status', 'price', 'active']
+    list_editable = ['no_in_pack', 'is_header', 'status', 'price', 'active']
     list_display_links = ['id', 'title']
+    list_filter = ['status', 'is_header', 'active']
+
+    inlines = [ArticulInCollection, VideoInline]
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)

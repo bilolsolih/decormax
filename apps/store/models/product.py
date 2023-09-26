@@ -24,6 +24,8 @@ class Collection(TimeStampedModel):
     building_material = models.ForeignKey(verbose_name=_('Building material'), to='store.BuildingMaterial', related_name='products', on_delete=models.SET_NULL, null=True)
     price = models.PositiveIntegerField(verbose_name=_('Price'))
 
+    is_header = models.BooleanField(_('Use for header?'), default=False)
+
     active = models.BooleanField(verbose_name=_('Is active'), default=True)
 
     class Meta:

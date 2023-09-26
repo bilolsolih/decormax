@@ -12,6 +12,7 @@ class News(TimeStampedModel):
     subtitle = models.TextField(verbose_name=_('Subtitle'), blank=True, null=True)
     photo = models.ImageField(verbose_name=_('Photo'), upload_to='images/news/%Y/%m/%d')
     content = RichTextField(verbose_name=_('Content'))
+    is_header = models.BooleanField(_('Use for header?'), default=False)
 
     class Meta:
         verbose_name = _('News')

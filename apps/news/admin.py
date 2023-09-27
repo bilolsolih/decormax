@@ -18,6 +18,7 @@ class PictureInline(admin.TabularInline):
     fields = ['photo']
 
 
+@admin.register(News)
 class NewsAdmin(TranslationAdmin):
     list_display = ['id', 'title', 'photo', 'is_header']
     list_editable = ['is_header']
@@ -27,11 +28,6 @@ class NewsAdmin(TranslationAdmin):
     inlines = [PictureInline]
 
 
+@admin.register(Picture)
 class PictureAdmin(admin.ModelAdmin):
     actions = [delete_selected]
-
-
-admin.site.register(Picture, PictureAdmin)
-admin.site.register(News, NewsAdmin)
-
-# Register your models here.

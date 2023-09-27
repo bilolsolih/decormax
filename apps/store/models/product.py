@@ -25,6 +25,7 @@ class Collection(TimeStampedModel):
     price = models.PositiveIntegerField(verbose_name=_('Price'))
 
     is_header = models.BooleanField(_('Use for header?'), default=False)
+    is_main_page = models.BooleanField(_('Use for main page?'), default=False)
 
     active = models.BooleanField(verbose_name=_('Is active'), default=True)
 

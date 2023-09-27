@@ -19,6 +19,7 @@ class PictureInline(admin.TabularInline):
 
 
 class NewsAdmin(TranslationAdmin):
+    list_display = ['id', 'title', 'photo', 'is_header']
     actions = [delete_selected]
     inlines = [PictureInline]
 

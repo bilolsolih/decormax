@@ -1,5 +1,4 @@
 from .base import *  # noqa
-from os import getenv
 
 ALLOWED_HOSTS = ['bilolsolih.pythonanywhere.com', 'api.maxdecor.uz']
 

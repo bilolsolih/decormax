@@ -28,7 +28,8 @@ class CollectionAdmin(TranslationAdmin):
     list_display = ['id', 'title', 'no_in_pack', 'is_header', 'status', 'price', 'active']
     list_editable = ['no_in_pack', 'is_header', 'status', 'price', 'active']
     list_display_links = ['id', 'title']
-    list_filter = ['status', 'is_header', 'active']
+    list_filter = ['status', 'is_header', 'is_main_page', 'active']
+    search_fields = ['title']
 
     inlines = [ArticulInCollection, VideoInline]
 

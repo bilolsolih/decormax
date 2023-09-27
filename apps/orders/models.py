@@ -6,20 +6,13 @@ from .choices import DELIVERY_TYPES, ORDER_STATUS
 
 
 class Order(models.Model):
-    user = models.ForeignKey(
-        verbose_name=_('User'), to='users.User', related_name='orders', on_delete=models.CASCADE, blank=True, null=True
-    )
-    store = models.ForeignKey(
-        verbose_name=_('Store'), to='store.Store', related_name='orders', on_delete=models.SET_NULL, null=True
-    )
+    user = models.ForeignKey(verbose_name=_('User'), to='users.User', related_name='orders', on_delete=models.CASCADE, blank=True, null=True)
+    store = models.ForeignKey(verbose_name=_('Store'), to='store.Store', related_name='orders', on_delete=models.SET_NULL, null=True)
     full_name = models.CharField(verbose_name=_('Full name'), max_length=128)
     phone_number = PhoneNumberField(verbose_name=_('Phone number'), region='UZ')
     email = models.EmailField(verbose_name=_('Email'), blank=True, null=True)
     delivery_type = models.CharField(verbose_name=_('Delivery type'), choices=DELIVERY_TYPES, max_length=1)
-    payment_method = models.ForeignKey(
-        verbose_name=_('Payment method'), to='orders.PaymentType', related_name='orders', on_delete=models.SET_NULL,
-        null=True
-    )
+    payment_method = models.ForeignKey(verbose_name=_('Payment method'), to='orders.PaymentType', related_name='orders', on_delete=models.SET_NULL, null=True)
     final_price = models.DecimalField(verbose_name=_('Final price'), max_digits=24, decimal_places=2, default=0)
 
     city = models.CharField(_('Destination city'), max_length=128, blank=True, null=True)

@@ -5,7 +5,6 @@ from rest_framework.parsers import FormParser, JSONParser
 from rest_framework.response import Response
 
 from apps.cart.models import Cart, CartItem
-from apps.orders.models import Order
 
 from .custom_permission import IsNotRegisteredAlready
 from .serializers import UserRegisterSerializer

@@ -30,7 +30,7 @@ class Address(models.Model):
     region = models.CharField(verbose_name=_('Region'), max_length=128)
     district = models.CharField(verbose_name=_('District'), max_length=128)
     street = models.CharField(verbose_name=_('Street'), max_length=128)
-    house_no = models.CharField(verbose_name=_('House number'), max_length=3)
+    house_no = models.CharField(verbose_name=_('House number'), max_length=12)
 
     class Meta:
         verbose_name = _('Address')

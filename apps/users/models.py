@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
+from apps.cart.models import Cart
 from apps.common.models import TimeStampedModel
 
 
@@ -14,6 +15,7 @@ class UserManager(BaseUserManager):
         user = self.model(username=username, **extra_fields)
         user.set_password(password)
         user.save()
+        Cart.objects.create(user=user)
         return user
 
     def create_superuser(self, username, password=None, **extra_fields):

@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import User, TelegramUser, UserToken
+from .models import User, TelegramUser
 
 
+@admin.register(User)
 class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'first_name', 'last_name', 'phone_number', 'is_staff')
     list_filter = ('is_staff', 'is_superuser', 'is_active')
@@ -30,15 +31,3 @@ class TelegramUserAdmin(admin.ModelAdmin):
     list_editable = ['active']
     list_filter = ['active']
     search_fields = ['full_name', 'chat_id']
-
-
-admin.site.register(User, CustomUserAdmin)
-
-
-class UserTokenAdmin(admin.ModelAdmin):
-    list_display = ['user', 'token', 'is_expired']
-    readonly_fields = ['is_expired']
-
-
-admin.site.register(UserToken, UserTokenAdmin)
-# Register your models here.

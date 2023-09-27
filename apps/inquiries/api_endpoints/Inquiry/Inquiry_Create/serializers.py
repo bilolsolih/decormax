@@ -6,4 +6,4 @@ from apps.inquiries.models import Inquiry
 class InquiryCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inquiry
-        fields = ['full_name', 'phone_number', 'on_collection', 'email']
+        fields = ['full_name', 'phone_number', 'on_collection', 'email', 'is_call']

@@ -10,4 +10,3 @@ from apps.news.models import News, Picture
 def news_or_picture_saved(sender, instance, created, **kwargs):
     if created and instance.photo and instance.photo.width > 1920:
         photo_compress(instance.pk, instance._meta.app_label, instance._meta.model_name)
-# TODO: In prod, compress must be called with delay

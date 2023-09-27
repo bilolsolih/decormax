@@ -26,8 +26,3 @@ class NewsAdmin(TranslationAdmin):
     search_fields = ['title']
     actions = [delete_selected]
     inlines = [PictureInline]
-
-
-@admin.register(Picture)
-class PictureAdmin(admin.ModelAdmin):
-    actions = [delete_selected]

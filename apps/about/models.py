@@ -75,3 +75,32 @@ class CompanyStat(models.Model):
 
     def __str__(self):
         return f"Stats for - {self.title}"
+
+
+class ContactPhoneNumber(models.Model):
+    title = models.CharField(max_length=256, verbose_name=_('Title'))
+    phonenumbers = models.CharField(verbose_name=_('Phone Number'), null=True, blank=True, max_length=15)
+
+    class Meta:
+        verbose_name = _('Contact number')
+        verbose_name_plural = _('Contact numbers')
+
+    def __str__(self):
+        return self.title
+
+
+class Contact(models.Model):
+    type = models.CharField(max_length=256, verbose_name=_('Type'))
+    title = models.CharField(max_length=256, verbose_name=_('Title'))
+    phonenumbers = models.ForeignKey(to='ContactPhoneNumber', verbose_name=_('Phone Number'), null=True, blank=True,
+                                     on_delete=models.SET_NULL)
+    address = RichTextField(_('Description'))
+    location = models.TextField(verbose_name=_('Location for iFrame'), null=True, blank=True)
+    social_media = models.ManyToManyField(to='SocialMedia', verbose_name=_('Social Media'), null=True, blank=True)
+
+    class Meta:
+        verbose_name = _('Contact')
+        verbose_name_plural = _('Contacts')
+
+    def __str__(self):
+        return f"Shop contacts for - {self.title}"

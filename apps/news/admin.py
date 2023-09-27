@@ -20,6 +20,9 @@ class PictureInline(admin.TabularInline):
 
 class NewsAdmin(TranslationAdmin):
     list_display = ['id', 'title', 'photo', 'is_header']
+    list_editable = ['is_header']
+    list_filter = ['is_header']
+    search_fields = ['title']
     actions = [delete_selected]
     inlines = [PictureInline]
 

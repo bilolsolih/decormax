@@ -2,18 +2,14 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
-import django.middleware.csrf
 from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY")
-
-# Application definition
 
 THIRD_PARTY_APPS = [
     "rest_framework",
@@ -24,7 +20,6 @@ THIRD_PARTY_APPS = [
     'corsheaders',
     'rosetta',
     'phonenumber_field',
-    # "django_extensions",
 ]
 
 CUSTOM_APPS = [
@@ -58,8 +53,8 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -230,13 +225,9 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.getenv('SMTP_USERNAME')
 EMAIL_HOST_PASSWORD = os.getenv('SMTP_PASSWORD')
 
-CART_SESSION_ID = 'cart'
-
 SWAGGER_SETTINGS = {
     'LOGIN_URL': 'users:user_login',
     'LOGOUT_URL': 'users:user_logout'
 }
-
-CSRF_COOKIE_AGE = 604800
 
 STAGE = "develop"

@@ -57,8 +57,8 @@ class CompanyHistory(models.Model):
     content = RichTextField(_('Content'))
 
     class Meta:
-        verbose_name = _('Company history')
-        verbose_name_plural = _('Company histories')
+        verbose_name = _('Company history (About Fabric)')
+        verbose_name_plural = _('Company histories (About Fabric)')
 
     def __str__(self):
         return f"Company history for - {self.year}"
@@ -99,8 +99,8 @@ class Contact(models.Model):
     social_media = models.ManyToManyField(to='SocialMedia', verbose_name=_('Social Media'), null=True, blank=True)
 
     class Meta:
-        verbose_name = _('Contact')
-        verbose_name_plural = _('Contacts')
+        verbose_name = _('Contact page')
+        verbose_name_plural = _('Contacts page')
 
     def __str__(self):
         return f"Shop contacts for - {self.title}"

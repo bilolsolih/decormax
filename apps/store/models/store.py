@@ -17,8 +17,8 @@ class Store(models.Model):
     is_certified = models.BooleanField(_('Is certified'), default=True)
 
     class Meta:
-        verbose_name = _('Store')
-        verbose_name_plural = _('Stores')
+        verbose_name = _('Store page')
+        verbose_name_plural = _('Stores page')
 
     def __str__(self):
         return f"{self.title} in {self.region}, {self.district}"

@@ -20,7 +20,7 @@ class CollectionFilterSet(FilterSet):
 
     class Meta:
         model = Collection
-        fields = ['status', 'is_header']
+        fields = ['status', 'is_header', 'is_main_page']
 
 
 class CustomPageNumberPagination(PageNumberPagination):

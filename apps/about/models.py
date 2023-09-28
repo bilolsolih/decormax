@@ -57,8 +57,8 @@ class CompanyHistory(models.Model):
     content = RichTextField(_('Content'))
 
     class Meta:
-        verbose_name = _('Company history')
-        verbose_name_plural = _('Company histories')
+        verbose_name = _('Company history (About Fabric)')
+        verbose_name_plural = _('Company histories (About Fabric)')
 
     def __str__(self):
         return f"Company history for - {self.year}"
@@ -99,8 +99,39 @@ class Contact(models.Model):
     social_media = models.ManyToManyField(to='SocialMedia', verbose_name=_('Social Media'), null=True, blank=True)
 
     class Meta:
-        verbose_name = _('Contact')
-        verbose_name_plural = _('Contacts')
+        verbose_name = _('Contact page')
+        verbose_name_plural = _('Contacts page')
 
     def __str__(self):
         return f"Shop contacts for - {self.title}"
+
+
+class Showroom(models.Model):
+    title = models.CharField(max_length=256, verbose_name=_('Title'))
+    content = RichTextField(_('Content'))
+    stats = models.ManyToManyField(to='CompanyStat', verbose_name=_('Stats'))
+    video = models.FileField(verbose_name=_('Video file'), upload_to='videos/about/showroom/%Y/%m/%d', blank=True,
+                             null=True)
+
+    class Meta:
+        verbose_name = _('Showroom page')
+        verbose_name_plural = _('Showrooms page')
+
+    def __str__(self):
+        return f"Showroom info for - {self.title}"
+
+
+class ShowroomDetails(models.Model):
+    showroom = models.ForeignKey(to='Showroom', verbose_name=_('Showroom'), null=True, blank=True,
+                                 on_delete=models.SET_NULL, related_name='details')
+    title = models.CharField(verbose_name=_('Title'), max_length=256)
+    content = models.TextField(_('Content'))
+    photo = models.ImageField(verbose_name=_('Photo'), upload_to='images/about/showroom/%Y/%m/%d')
+    photo_two = models.ImageField(verbose_name=_('Photo'), upload_to='images/about/showroom/%Y/%m/%d')
+
+    class Meta:
+        verbose_name = _('Showroom Detail')
+        verbose_name_plural = _('Showrooms Detail')
+
+    def __str__(self):
+        return f"Showroom info for - {self.title}"

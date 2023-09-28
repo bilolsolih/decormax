@@ -1,7 +1,8 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
-from .models import Email, Address, PhoneNumber, SocialMedia, CompanyStat, CompanyHistory, ContactPhoneNumber, Contact
+from .models import Email, Address, PhoneNumber, SocialMedia, CompanyStat, CompanyHistory, ContactPhoneNumber, Contact, \
+    ShowroomDetails, Showroom
 
 
 @admin.register(Email)
@@ -61,3 +62,16 @@ class ContactAdmin(admin.ModelAdmin):
     list_display_links = ['id', 'title']
     ordering = ['id']
     list_per_page = 10
+
+
+class ShowroomDetailAdmin(admin.TabularInline):
+    model = ShowroomDetails
+
+
+@admin.register(Showroom)
+class ShowroomAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'video']
+    list_per_page = 10
+    list_display_links = ['id', 'title', 'video']
+    ordering = ['id']
+    inlines = [ShowroomDetailAdmin]

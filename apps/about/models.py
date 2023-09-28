@@ -82,8 +82,8 @@ class ContactPhoneNumber(models.Model):
     phonenumbers = models.CharField(verbose_name=_('Phone Number'), null=True, blank=True, max_length=15)
 
     class Meta:
-        verbose_name = _('Contact number')
-        verbose_name_plural = _('Contact numbers')
+        verbose_name = _('Contact number for page')
+        verbose_name_plural = _('Contact numbers for page')
 
     def __str__(self):
         return self.title

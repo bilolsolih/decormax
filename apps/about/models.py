@@ -92,7 +92,7 @@ class ContactPhoneNumber(models.Model):
 class Contact(models.Model):
     title = models.CharField(max_length=256, verbose_name=_('Title'))
     company_name = models.CharField(max_length=256, verbose_name=_('Company name'), null=True, blank=True)
-    description = RichTextField(_('Description'))
+    description = RichTextField(_('Description'), null=True, blank=True)
     phonenumbers = models.ForeignKey(to='ContactPhoneNumber', verbose_name=_('Phone Number'), null=True, blank=True,
                                      on_delete=models.SET_NULL)
     address = RichTextField(_('Address'))

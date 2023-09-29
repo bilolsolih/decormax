@@ -23,8 +23,8 @@ class UserLikeProductAPIView(APIView):
                 user.liked_products.remove(collection)
         except Collection.DoesNotExist:
             raise ValueError('No such collection.')
-        except:
-            raise ValueError('Something went wrong.')
+        except Exception as e:
+            raise ValueError(e)
 
 
 __all__ = ['UserLikeProductAPIView']

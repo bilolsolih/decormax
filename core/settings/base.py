@@ -70,6 +70,7 @@ CORS_ALLOWED_ORIGINS = [
     'https://maxdecor.uz',
     'https://www.maxdecor.uz',
     'http://maxdecor.uz',
+    'http://192.168.2.167:8080'
 
 ]
 CSRF_TRUSTED_ORIGINS = [

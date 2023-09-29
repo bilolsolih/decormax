@@ -22,8 +22,7 @@ class OrderCreateAPIView(CreateAPIView):
     def perform_create(self, serializer):
         user = self.request.user if self.request.user.is_authenticated else None
         device_id = self.request.query_params.get('device_id', None)
-        if user and device_id:
-            raise ValueError('device_id is needed only for guest users.')
+
         if user:
             items = CartItem.objects.filter(cart__user=user)
         else:

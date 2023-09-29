@@ -9,7 +9,7 @@ from apps.store.models.product import Collection
 class UserLikeProductAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, product_id):
+    def post(self, request, product_id):
         user = request.user
         collection = Collection.objects.filter(id=product_id).first()
         if collection:
@@ -18,7 +18,7 @@ class UserLikeProductAPIView(APIView):
                 return Response(status=status.HTTP_200_OK)
             else:
                 user.liked_products.remove(collection)
-                return Response(status=status.HTTP_204_NO_CONTENT)
+                return Response(status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)
 

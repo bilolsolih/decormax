@@ -10,17 +10,21 @@ class UserLikeProductAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, product_id, *args, **kwargs):
-        user = request.user
-        collection = Collection.objects.filter(id=product_id).first()
-        if collection:
+        self.like_or_dislike(request.user, product_id)
+
+        return Response(status=status.HTTP_200_OK)
+
+    def like_or_dislike(self, user, product_id):
+        try:
+            collection = Collection.objects.get(id=product_id)
             if collection not in user.liked_products.all():
                 user.liked_products.add(collection)
-                return Response(status=status.HTTP_200_OK)
             else:
                 user.liked_products.remove(collection)
-                return Response(status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+        except Collection.DoesNotExist:
+            raise ValueError('No such collection.')
+        except:
+            raise ValueError('Something went wrong.')
 
 
 __all__ = ['UserLikeProductAPIView']

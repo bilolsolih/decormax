@@ -35,7 +35,7 @@ class OrderCreateAPIView(CreateAPIView):
         final_price = items.aggregate(final_price=Sum('cost'))['final_price']
         order = serializer.save(user=user, final_price=final_price)
         for item in items:
-            OrderItem.objects.create(order=order, product=item.product, quantity=item.quantity, cost=item.cost)
+            OrderItem.objects.create(order=order, collection=item.collection, quantity=item.quantity, cost=item.cost)
             item.delete()
 
 

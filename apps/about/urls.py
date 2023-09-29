@@ -1,8 +1,8 @@
 from django.urls import path
 
 from . import api_endpoints as views
-from .api_endpoints.Contacts.ContactsList.views import ContactListAPIView
-from .api_endpoints.Showroom.Showroom_List.views import ShowroomListAPIView
+# from .api_endpoints.Contacts.ContactsList.views import ContactListAPIView
+# from .api_endpoints.Showroom.Showroom_List.views import ShowroomListAPIView
 
 app_name = 'about'
 
@@ -13,6 +13,6 @@ urlpatterns = [
     path('emails/', views.EmailListAPIView.as_view(), name='email_list'),
     path('phone_numbers/', views.PhoneNumberListView.as_view(), name='phone_number_list'),
     path('social_medias/', views.SocialMediaListAPIView.as_view(), name='social_media_list'),
-    path('contacts/', ContactListAPIView.as_view(), name='contact_list'),
-    path('showroom/', ShowroomListAPIView.as_view(), name='showroom_list')
+    # path('contacts/', ContactListAPIView.as_view(), name='contact_list'),
+    # path('showroom/', ShowroomListAPIView.as_view(), name='showroom_list')
 ]

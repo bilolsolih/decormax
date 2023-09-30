@@ -74,10 +74,6 @@ class UserToken(TimeStampedModel):
     user = models.OneToOneField(verbose_name=_('User'), to='users.User', related_name='token', on_delete=models.CASCADE)
     token = models.CharField(verbose_name=_('Token'), max_length=128)
 
-    @property
-    def is_expired(self):
-        return (timezone.now() - self.created) > timedelta(hours=2)
-
     class Meta:
         verbose_name = _('User token')
         verbose_name_plural = _('User tokens')

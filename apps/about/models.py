@@ -79,7 +79,7 @@ class CompanyStat(models.Model):
 
 class ContactPhoneNumber(models.Model):
     title = models.CharField(max_length=256, verbose_name=_('Title'))
-    phonenumbers = models.CharField(verbose_name=_('Phone Number'), null=True, blank=True, max_length=15)
+    phonenumbers = models.CharField(verbose_name=_('Phone Number'), null=True, blank=True, max_length=20)
 
     class Meta:
         verbose_name = _('Contact number for page')
@@ -90,11 +90,12 @@ class ContactPhoneNumber(models.Model):
 
 
 class Contact(models.Model):
-    type = models.CharField(max_length=256, verbose_name=_('Type'))
     title = models.CharField(max_length=256, verbose_name=_('Title'))
+    company_name = models.CharField(max_length=256, verbose_name=_('Company name'), null=True, blank=True)
+    description = RichTextField(_('Description'), null=True, blank=True)
     phonenumbers = models.ForeignKey(to='ContactPhoneNumber', verbose_name=_('Phone Number'), null=True, blank=True,
                                      on_delete=models.SET_NULL)
-    address = RichTextField(_('Description'))
+    address = RichTextField(_('Address'))
     location = models.TextField(verbose_name=_('Location for iFrame'), null=True, blank=True)
     social_media = models.ManyToManyField(to='SocialMedia', verbose_name=_('Social Media'), null=True, blank=True)
 

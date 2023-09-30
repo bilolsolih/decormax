@@ -39,7 +39,6 @@ class CollectionListAPIView(ListAPIView):
     serializer_class = CollectionListSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = CollectionFilterSet
-    pagination_class = CustomPageNumberPagination
 
 
 __all__ = ['CollectionListAPIView']

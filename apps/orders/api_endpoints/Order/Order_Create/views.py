@@ -22,8 +22,7 @@ class OrderCreateAPIView(CreateAPIView):
     def perform_create(self, serializer):
         user = self.request.user if self.request.user.is_authenticated else None
         device_id = self.request.query_params.get('device_id', None)
-        if user and device_id:
-            raise ValueError('device_id is needed only for guest users.')
+
         if user:
             items = CartItem.objects.filter(cart__user=user)
         else:
@@ -35,7 +34,7 @@ class OrderCreateAPIView(CreateAPIView):
         final_price = items.aggregate(final_price=Sum('cost'))['final_price']
         order = serializer.save(user=user, final_price=final_price)
         for item in items:
-            OrderItem.objects.create(order=order, product=item.product, quantity=item.quantity, cost=item.cost)
+            OrderItem.objects.create(order=order, collection=item.collection, artikul=item.articul, quantity=item.quantity, cost=item.cost)
             item.delete()
 
 

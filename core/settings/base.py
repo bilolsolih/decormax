@@ -1,3 +1,5 @@
+import os
+from datetime import timedelta
 from pathlib import Path
 
 from django.utils.translation import gettext_lazy as _
@@ -164,9 +166,6 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=10),
 }
 
-from datetime import timedelta
-import os
-
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
 
 CORS_ALLOW_CREDENTIALS = True
@@ -226,6 +225,5 @@ SWAGGER_SETTINGS = {
     'LOGIN_URL': 'users:user_login',
     'LOGOUT_URL': 'users:user_logout'
 }
-
 
 STAGE = "develop"

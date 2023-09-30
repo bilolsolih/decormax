@@ -79,7 +79,7 @@ class CompanyStat(models.Model):
 
 class ContactPhoneNumber(models.Model):
     title = models.CharField(max_length=256, verbose_name=_('Title'))
-    phonenumbers = models.CharField(verbose_name=_('Phone Number'), null=True, blank=True, max_length=15)
+    phonenumbers = models.CharField(verbose_name=_('Phone Number'), null=True, blank=True, max_length=20)
 
     class Meta:
         verbose_name = _('Contact number for page')

@@ -4,7 +4,6 @@ from rest_framework import status
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from django.db.models import Q
 
 from apps.store.models.product import Collection
 from apps.store.models.product_parameters import TargetRoom, Style, PictureType, Color, Size
@@ -43,7 +42,7 @@ class CollectionListAPIView(ListAPIView):
         queryset = Collection.objects.all()
         s = self.request.query_params.get('s', None)
         if s:
-            queryset = queryset.filter(Q(title__icontains=s) | Q(articuls__title__iexact=s))
+            queryset = queryset.filter(articuls__title__iexact=s)
         return queryset
 
     __all__ = ['CollectionListAPIView']

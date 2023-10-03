@@ -17,6 +17,7 @@ class CollectionFilterSet(FilterSet):
     picture_type = django_filters.ModelMultipleChoiceFilter(field_name='picture_type__pk', queryset=PictureType.objects.all(), to_field_name='pk')
     color = django_filters.ModelMultipleChoiceFilter(field_name='color__pk', queryset=Color.objects.all(), to_field_name='pk')
     size = django_filters.ModelMultipleChoiceFilter(field_name='size__pk', queryset=Size.objects.all(), to_field_name='pk')
+    articul = django_filters.CharFilter(field_name='articuls__title', lookup_expr='iexact')
 
     class Meta:
         model = Collection

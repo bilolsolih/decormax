@@ -7,7 +7,7 @@ class ShowroomListSerializer(ModelSerializer):
     class Meta:
         model = Showroom
         fields = ['id', 'title', 'content', 'stats', 'video', 'details']
-        depth = 1
+        depth = 2
 
 
 class ShowroomDetailsSerializer(ModelSerializer):

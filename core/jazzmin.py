@@ -24,6 +24,7 @@ JAZZMIN_SETTINGS = {
     #############
     # Whether to display the side menu
     "show_sidebar": True,
+    'hide_models': ['about.Image', 'about.CompanyStatForShowroom'],
     # Whether to aut expand the menu
     "navigation_expanded": True,
     # for the full list of 5.13.0 free icon classes

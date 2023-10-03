@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from apps.about.models import Showroom
+from apps.about.models import Showroom, ShowroomDetails
 
 
 class ShowroomListSerializer(ModelSerializer):
@@ -10,3 +10,8 @@ class ShowroomListSerializer(ModelSerializer):
         depth = 1
 
 
+class ShowroomDetailsSerializer(ModelSerializer):
+    class Meta:
+        model = ShowroomDetails
+        fields = '__all__'
+        depth = 1

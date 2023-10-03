@@ -79,7 +79,7 @@ class CompanyStat(models.Model):
 
 class ContactPhoneNumber(models.Model):
     title = models.CharField(max_length=256, verbose_name=_('Title'))
-    phonenumbers = models.CharField(verbose_name=_('Phone Number'), null=True, blank=True, max_length=20)
+    phone_number = models.CharField(verbose_name=_('Phone Number'), null=True, blank=True, max_length=20)
 
     class Meta:
         verbose_name = _('Contact number for page')
@@ -96,6 +96,7 @@ class Contact(models.Model):
     phonenumbers = models.ForeignKey(to='ContactPhoneNumber', verbose_name=_('Phone Number'), null=True, blank=True,
                                      on_delete=models.SET_NULL)
     address = RichTextField(_('Address'))
+    address_link = models.CharField(verbose_name=_('Address'), max_length=256)
     location = models.TextField(verbose_name=_('Location for iFrame'), null=True, blank=True)
     social_media = models.ManyToManyField(to='SocialMedia', verbose_name=_('Social Media'), null=True, blank=True)
 
@@ -127,8 +128,7 @@ class ShowroomDetails(models.Model):
                                  on_delete=models.SET_NULL, related_name='details')
     title = models.CharField(verbose_name=_('Title'), max_length=256)
     content = models.TextField(_('Content'))
-    photo = models.ImageField(verbose_name=_('Photo'), upload_to='images/about/showroom/%Y/%m/%d')
-    photo_two = models.ImageField(verbose_name=_('Photo'), upload_to='images/about/showroom/%Y/%m/%d')
+    images = models.ManyToManyField(to='Image', verbose_name=_('Images'), blank=True)
 
     class Meta:
         verbose_name = _('Showroom Detail')
@@ -136,3 +136,15 @@ class ShowroomDetails(models.Model):
 
     def __str__(self):
         return f"Showroom info for - {self.title}"
+
+
+class Image(models.Model):
+    title = models.CharField(max_length=256, verbose_name=_('Title'))
+    image = models.ImageField(verbose_name=_('Image'), upload_to='images/about/showroom/%Y/%m/%d')
+
+    class Meta:
+        verbose_name = _('Image')
+        verbose_name_plural = _('Images')
+
+    def __str__(self):
+        return f"Image - {self.title}"

@@ -6,4 +6,4 @@ from apps.about.models import CompanyStat
 class CompanyStatListSerializer(ModelSerializer):
     class Meta:
         model = CompanyStat
-        fields = ['id', 'title', 'content']
+        fields = ['id', 'title', 'content', 'icon']

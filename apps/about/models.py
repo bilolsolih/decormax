@@ -54,7 +54,10 @@ class SocialMedia(models.Model):
 
 class CompanyHistory(models.Model):
     year = models.CharField(_('Year'), max_length=4)
-    content = RichTextField(_('Content'))
+    description = RichTextField(_('Description'))
+    description_two = RichTextField(_('Description two'))
+    image = models.ImageField(_('Image'), upload_to='images/about/company_history/')
+    image_two = models.ImageField(_('Image'), upload_to='images/about/company_history/')
 
     class Meta:
         verbose_name = _('Company history (About Fabric)')
@@ -96,7 +99,7 @@ class Contact(models.Model):
     phonenumbers = models.ForeignKey(to='ContactPhoneNumber', verbose_name=_('Phone Number'), null=True, blank=True,
                                      on_delete=models.SET_NULL)
     address = RichTextField(_('Address'))
-    address_link = models.CharField(verbose_name=_('Address'), max_length=256)
+    address_link = models.CharField(verbose_name=_('Address link'), max_length=256)
     location = models.TextField(verbose_name=_('Location for iFrame'), null=True, blank=True)
     social_media = models.ManyToManyField(to='SocialMedia', verbose_name=_('Social Media'), null=True, blank=True)
 
@@ -111,7 +114,7 @@ class Contact(models.Model):
 class Showroom(models.Model):
     title = models.CharField(max_length=256, verbose_name=_('Title'))
     content = RichTextField(_('Content'))
-    stats = models.ManyToManyField(to='CompanyStat', verbose_name=_('Stats'))
+    stats = models.ManyToManyField(to='CompanyStatForShowroom', verbose_name=_('Stats'))
     video = models.FileField(verbose_name=_('Video file'), upload_to='videos/about/showroom/%Y/%m/%d', blank=True,
                              null=True)
 
@@ -148,3 +151,16 @@ class Image(models.Model):
 
     def __str__(self):
         return f"Image - {self.title}"
+
+
+class CompanyStatForShowroom(models.Model):
+    icon = models.ImageField(_('Stat icon'), upload_to='images/about/company_stats/')
+    title = models.CharField(_('Stat title'), max_length=256)
+    content = RichTextField(_('Content'))
+
+    class Meta:
+        verbose_name = _('Company stat for showroom')
+        verbose_name_plural = _('Company stats for showroom')
+
+    def __str__(self):
+        return f"Stats for - {self.title}"

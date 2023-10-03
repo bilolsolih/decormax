@@ -2,7 +2,7 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
 from .models import Email, Address, PhoneNumber, SocialMedia, CompanyStat, CompanyHistory, ContactPhoneNumber, Contact, \
-    Showroom, ShowroomDetails, Image
+    Showroom, ShowroomDetails, Image, CompanyStatForShowroom
 
 
 @admin.register(Email)
@@ -46,8 +46,8 @@ class CompanyStatAdmin(admin.ModelAdmin):
 
 @admin.register(CompanyHistory)
 class CompanyHistoryAdmin(admin.ModelAdmin):
-    list_display = ['id', 'year', 'content']
-    list_display_links = ['id', 'year', 'content']
+    list_display = ['id', 'year']
+    list_display_links = ['id', 'year']
 
 
 @admin.register(ContactPhoneNumber)
@@ -78,3 +78,4 @@ class ShowroomAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Image)
+admin.site.register(CompanyStatForShowroom)

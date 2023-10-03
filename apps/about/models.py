@@ -150,7 +150,7 @@ class Image(models.Model):
         verbose_name_plural = _('Images')
 
     def __str__(self):
-        return f"Image - {self.title}"
+        return f"Image - {self.image}"
 
 
 class CompanyStatForShowroom(models.Model):

@@ -34,8 +34,10 @@ class Order(models.Model):
         response = dict()
         if self.items:
             for item in self.items.all():
-                response[str(item.id)]['collection'] = item.collection.title
-                response[str(item.id)]['articul'] = item.artikul.title
+                response[str(item.id)] = {
+                    'collection': item.collection.title,
+                    'articul': item.artikul.title,
+                }
         return response
 
     def __str__(self):

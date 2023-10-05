@@ -29,6 +29,15 @@ class Order(models.Model):
         verbose_name = _('Order')
         verbose_name_plural = _('Orders')
 
+    @property
+    def get_collection_articuls(self):
+        response = dict()
+        if self.items:
+            for item in self.items:
+                response[item.id]['collection'] = item.collection.title
+                response[item.id]['articul'] = item.artikul.title
+        return response
+
     def __str__(self):
         return f"Order {self.id} by {self.user.username}"
 

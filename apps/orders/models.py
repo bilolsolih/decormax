@@ -33,7 +33,7 @@ class Order(models.Model):
     def get_collection_articuls(self):
         response = dict()
         if self.items:
-            for item in self.items:
+            for item in self.items.all():
                 response[item.id]['collection'] = item.collection.title
                 response[item.id]['articul'] = item.artikul.title
         return response

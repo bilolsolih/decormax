@@ -39,7 +39,10 @@ class Order(models.Model):
         return response
 
     def __str__(self):
-        return f"Order {self.id} by {self.user.username}"
+        if self.user:
+            return f"Order {self.id} by {self.user.username}"
+        else:
+            return f"Order {self.id}"
 
 
 class OrderItem(models.Model):

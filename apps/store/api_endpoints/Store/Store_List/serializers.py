@@ -7,4 +7,4 @@ class StoreListSerializer(ModelSerializer):
     class Meta:
         model = Store
         fields = ['id', 'title', 'photo', 'info', 'phone_number', 'region', 'district', 'address', 'orient', 'location',
-                  'is_certified', 'working_hours', 'address_link']
+                  'is_certified', 'working_hours', 'working_hours_two', 'address_link']

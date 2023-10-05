@@ -30,7 +30,7 @@ class ManufacturingMethodTranslationOptions(TranslationOptions):
 
 
 class StoreTranslationOptions(TranslationOptions):
-    fields = ('working_hours',)
+    fields = ('working_hours', 'working_hours_two')
 
 
 translator.register(TargetRoom, TargetRoomTranslationOptions)

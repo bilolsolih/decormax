@@ -12,7 +12,7 @@ class Order(models.Model):
     phone_number = PhoneNumberField(verbose_name=_('Phone number'), region='UZ')
     email = models.EmailField(verbose_name=_('Email'), blank=True, null=True)
     delivery_type = models.CharField(verbose_name=_('Delivery type'), choices=DELIVERY_TYPES, max_length=1)
-    payment_method = models.ForeignKey(verbose_name=_('Payment method'), to='orders.PaymentType', related_name='orders', on_delete=models.SET_NULL, null=True)
+    payment_method = models.ForeignKey(verbose_name=_('Payment method'), to='orders.PaymentType', related_name='orders', on_delete=models.SET_NULL, null=True, blank=True)
     final_price = models.DecimalField(verbose_name=_('Final price'), max_digits=24, decimal_places=2, default=0)
 
     city = models.CharField(_('Destination city'), max_length=128, blank=True, null=True)

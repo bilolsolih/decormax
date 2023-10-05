@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
@@ -11,6 +12,9 @@ class Store(models.Model):
     region = models.CharField(verbose_name=_('Region'), max_length=128)
     district = models.CharField(verbose_name=_('City or district'), max_length=128)
     address = models.CharField(verbose_name=_('Address'), max_length=256)
+    address_link = models.CharField(verbose_name=_('Address link'), max_length=256)
+    working_hours = models.CharField(verbose_name=_('Working hours'), max_length=256)
+    working_hours_two = models.CharField(verbose_name=_('Working hours'), max_length=256)
     orient = models.CharField(verbose_name=_('Orient'), max_length=256, blank=True, null=True)
     location = models.TextField(verbose_name=_('Location for iFrame'), blank=True, null=True)
 

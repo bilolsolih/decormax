@@ -6,4 +6,5 @@ from apps.store.models.store import Store
 class StoreListSerializer(ModelSerializer):
     class Meta:
         model = Store
-        fields = ['id', 'title', 'photo', 'info', 'phone_number', 'region', 'district', 'address', 'orient', 'location', 'is_certified']
+        fields = ['id', 'title', 'photo', 'info', 'phone_number', 'region', 'district', 'address', 'orient', 'location',
+                  'is_certified', 'working_hours', 'working_hours_two', 'address_link']

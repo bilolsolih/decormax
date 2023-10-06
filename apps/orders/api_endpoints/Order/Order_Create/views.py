@@ -34,9 +34,11 @@ class OrderCreateAPIView(CreateAPIView):
 
         final_price = items.aggregate(final_price=Sum('cost'))['final_price']
         order = serializer.save(user=user, final_price=final_price)
+        photos = []
         for item in items:
             OrderItem.objects.create(order=order, collection=item.collection, artikul=item.articul,
                                      quantity=item.quantity, cost=item.cost)
+            photos.append(('photo', open(item.articul.photo.path, 'rb')))
             item.delete()
 
         telegram_bot_token = '6619661511:AAFbb2HydLQNVdIqkzh6slLUsxWvKM0xxQI'
@@ -53,10 +55,6 @@ class OrderCreateAPIView(CreateAPIView):
         message += f"Адрес: {order.address}\n"
         message += f"Этаж: {order.level}\n"
         message += f"Дата доставки: {order.delivery_date}\n"
-
-        photos = []
-        for item in items:
-            photos.append(('photo', open(item.articul.photo.path, 'rb')))
 
         response = requests.post(
             f"https://api.telegram.org/bot{telegram_bot_token}/sendMediaGroup",

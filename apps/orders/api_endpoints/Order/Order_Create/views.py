@@ -60,7 +60,7 @@ class OrderCreateAPIView(CreateAPIView):
 
         response = requests.post(
             f"https://api.telegram.org/bot{telegram_bot_token}/sendMediaGroup",
-            data={'chat_id': chat_id, 'caption': message},
+            data={'chat_id': chat_id},
             files=photos,
             params={'caption': message}
         )

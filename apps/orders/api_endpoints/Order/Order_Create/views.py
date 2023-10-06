@@ -56,7 +56,7 @@ class OrderCreateAPIView(CreateAPIView):
 
         photos = []
         for item in items:
-            photos.append(('photo', open(item.artikul.photo.path, 'rb')))
+            photos.append(('photo', open(item.articul.photo.path, 'rb')))
 
         response = requests.post(
             f"https://api.telegram.org/bot{telegram_bot_token}/sendMediaGroup",

@@ -52,7 +52,7 @@ class OrderCreateAPIView(CreateAPIView):
         for item in items:
             OrderItem.objects.create(order=order, collection=item.collection, artikul=item.articul,
                                      quantity=item.quantity, cost=item.cost)
-            photos.append(('photo', item.artikul.photo.file))
+            photos.append(('photo', item.articul.photo.file))
             item.delete()
 
         telegram_bot_token = '6619661511:AAFbb2HydLQNVdIqkzh6slLUsxWvKM0xxQI'

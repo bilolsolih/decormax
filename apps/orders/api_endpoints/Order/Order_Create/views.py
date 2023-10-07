@@ -34,16 +34,6 @@ class OrderCreateAPIView(CreateAPIView):
 
         final_price = items.aggregate(final_price=Sum('cost'))['final_price']
         order = serializer.save(user=user, final_price=final_price)
-        for item in items:
-            OrderItem.objects.create(order=order, collection=item.collection, artikul=item.articul,
-                                     quantity=item.quantity, cost=item.cost)
-            item.delete()
-
-        photo_path = []
-        order_items = OrderItem.objects.all(order=order)
-        for item in order_items:
-            photo_path.append(item.artikul.photo.path)
-        photos = [('photo', open(path, 'rb')) for path in photo_path]
         order_message = f"Order {order.id}:\n"
         order_message += f"Full Name: {order.full_name}\n"
         order_message += f"Phone Number: {order.phone_number}\n"
@@ -56,6 +46,15 @@ class OrderCreateAPIView(CreateAPIView):
         order_message += f"Адрес: {order.address}\n"
         order_message += f"Этаж: {order.level}\n"
         order_message += f"Дата доставки: {order.delivery_date}\n"
+
+        photos = []
+
+        for item in items:
+            OrderItem.objects.create(order=order, collection=item.collection, artikul=item.articul,
+                                     quantity=item.quantity, cost=item.cost)
+            photos.append(('photo', item.artikul.photo.file))
+            item.delete()
+
         telegram_bot_token = '6619661511:AAFbb2HydLQNVdIqkzh6slLUsxWvKM0xxQI'
         chat_id = '-1001920070201'
 
@@ -64,6 +63,7 @@ class OrderCreateAPIView(CreateAPIView):
             data={'chat_id': chat_id, 'caption': order_message},
             files=photos
         )
+
         if response.status_code != 200:
             pass
 

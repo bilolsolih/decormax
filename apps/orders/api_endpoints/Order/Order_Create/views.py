@@ -38,14 +38,17 @@ class OrderCreateAPIView(CreateAPIView):
         order_message += f"Full Name: {order.full_name}\n"
         order_message += f"Phone Number: {order.phone_number}\n"
         order_message += f"Email: {order.email}\n"
-        order_message += f"Способ доставки: {order.delivery_type}\n"
+        if order.delivery_type == 's':
+            order_message += "Способ доставки: Самовывоз\n"
+        else:
+            order_message += "Способ доставки: Доставка\n"
+            order_message += f"Город: {order.city}\n"
+            order_message += f"Регион: {order.region}\n"
+            order_message += f"Адрес: {order.address}\n"
+            order_message += f"Этаж: {order.level}\n"
+            order_message += f"Дата доставки: {order.delivery_date}\n"
         order_message += f"Способ оплаты: {order.payment_method}\n"
         order_message += f"Цена: {order.final_price}\n"
-        order_message += f"Город: {order.city}\n"
-        order_message += f"Регион: {order.region}\n"
-        order_message += f"Адрес: {order.address}\n"
-        order_message += f"Этаж: {order.level}\n"
-        order_message += f"Дата доставки: {order.delivery_date}\n"
 
         photos = []
 

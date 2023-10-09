@@ -45,4 +45,5 @@ class CollectionListAPIView(ListAPIView):
             queryset = queryset.filter(articuls__title__icontains=s)
         return queryset
 
-    __all__ = ['CollectionListAPIView']
+
+__all__ = ['CollectionListAPIView']

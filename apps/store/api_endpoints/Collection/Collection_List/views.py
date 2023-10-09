@@ -42,7 +42,7 @@ class CollectionListAPIView(ListAPIView):
         queryset = Collection.objects.all()
         s = self.request.query_params.get('s', None)
         if s:
-            queryset = queryset.filter(articuls__title__iexact=s)
+            queryset = queryset.filter(articuls__title__icontains=s)
         return queryset
 
     __all__ = ['CollectionListAPIView']

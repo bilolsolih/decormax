@@ -14,4 +14,5 @@ urlpatterns = [
     path('collections/list/', views.CollectionListAPIView.as_view(), name='collection_list'),
     path('collections/retrieve/<int:pk>/', views.CollectionRetrieveAPIView.as_view(), name='collection_retrieve'),
     path('building_materials/list/', views.BuildingMaterialListAPIView.as_view(), name='building_material_list'),
+    path('articul/list/', views.ArticulListAPIView.as_view(), name='articul_list')
 ]

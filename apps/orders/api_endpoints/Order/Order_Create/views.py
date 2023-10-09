@@ -1,4 +1,4 @@
-import telegram
+import requests
 from django.db.models.aggregates import Sum
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -34,29 +34,41 @@ class OrderCreateAPIView(CreateAPIView):
 
         final_price = items.aggregate(final_price=Sum('cost'))['final_price']
         order = serializer.save(user=user, final_price=final_price)
-        photos = []
         order_message = f"Order {order.id}:\n"
         order_message += f"Full Name: {order.full_name}\n"
         order_message += f"Phone Number: {order.phone_number}\n"
         order_message += f"Email: {order.email}\n"
-        order_message += f"Способ доставки: {order.delivery_type}\n"
+        if order.delivery_type == 's':
+            order_message += "Способ доставки: Самовывоз\n"
+        else:
+            order_message += "Способ доставки: Доставка\n"
+            order_message += f"Город: {order.city}\n"
+            order_message += f"Регион: {order.region}\n"
+            order_message += f"Адрес: {order.address}\n"
+            order_message += f"Этаж: {order.level}\n"
+            order_message += f"Дата доставки: {order.delivery_date}\n"
         order_message += f"Способ оплаты: {order.payment_method}\n"
         order_message += f"Цена: {order.final_price}\n"
-        order_message += f"Город: {order.city}\n"
-        order_message += f"Регион: {order.region}\n"
-        order_message += f"Адрес: {order.address}\n"
-        order_message += f"Этаж: {order.level}\n"
-        order_message += f"Дата доставки: {order.delivery_date}\n"
+
+        photos = []
+
         for item in items:
             OrderItem.objects.create(order=order, collection=item.collection, artikul=item.articul,
                                      quantity=item.quantity, cost=item.cost)
-            photos.append(telegram.InputMediaPhoto(media=open(item.articul.photo.path, 'rb'), caption=order_message))
+            photos.append(('photo', item.articul.photo.file))
             item.delete()
 
-        bot = telegram.Bot(token='6619661511:AAFbb2HydLQNVdIqkzh6slLUsxWvKM0xxQI')
+        telegram_bot_token = '6619661511:AAFbb2HydLQNVdIqkzh6slLUsxWvKM0xxQI'
         chat_id = '-1001920070201'
 
-        bot.send_media_group(chat_id=chat_id, media=photos)
+        response = requests.post(
+            f"https://api.telegram.org/bot{telegram_bot_token}/sendPhoto",
+            data={'chat_id': chat_id, 'caption': order_message},
+            files=photos
+        )
+
+        if response.status_code != 200:
+            pass
 
 
 __all__ = ['OrderCreateAPIView']
